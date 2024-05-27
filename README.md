@@ -36,17 +36,17 @@ pytest
 
 ## Training and Evaluation
 
-Choose between `src/experiments/local/run_experiments_local.py` for local execution (option 1) or `src/experiments/wandb/run_experiments_wandb.py` for execution with wandb integration (option 2) based on your needs. These two scripts act as `train.py` and `evaluate.py` scripts found in most ML papers. The environment has been tested on both Windows (11) and Linux (Ubuntu 22.04.4 LTS) OS, with a note that results may vary between different OS. If wandb is chosen, view results directly on the wandb platform, including benchmark comparisons. Follow the specific instructions in `evaluate_results_local.py`. 
+Choose between `src/experiments/local/run_experiments_local.py` for local execution (option 1) or `src/experiments/wandb/run_experiments_wandb.py` for execution with wandb integration (option 2). These two scripts act as `train.py` and `evaluate.py` scripts found in most ML papers. The environment has been tested on both Windows (11) and Linux (Ubuntu 22.04.4 LTS), with a note that results may vary between different OS. If wandb is chosen, view results directly on the wandb platform, including benchmark comparisons. Follow the specific instructions in `src/experiments/local/evaluate_results_local.py` or `src/experiments/wandb/evaluate_results_wandb.py` to evaluate the results.
 
-`run_experiments_local.py` also support argparser for customizable experiment runs:
+Note that `run_experiments_local.py` also support [argparser](https://docs.python.org/3/library/argparse.html) for customizable experiment runs:
 
 Unix (Linux, MacOS):
 ```bash
-python run_experiments_local.py --nn_config '{"nn_batch_size":32,"nn_epochs":100}' --simulator_architecture '[{"units":50,"activation":"relu"}]' --tree_config '{"tree_n_estimators":100}' --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
+python run_experiments_local.py --dataset="space_ga" --nn_config '{"nn_batch_size":32,"nn_epochs":100}' --simulator_architecture '[{"units":50,"activation":"relu"}]' --tree_config '{"tree_n_estimators":100}' --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```
 Windows
 ```bash
-python run_experiments_local.py --nn_config "{\\"nn_batch_size\\":32,\\"nn_epochs\\":100}" --simulator_architecture "[{\\"units\\":50,\\"activation\\":\\"relu\\"}]" --tree_config "{\\"tree_n_estimators\\":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
+python run_experiments_local.py --dataset="space_ga" --nn_config "{\\"nn_batch_size\\":32,\\"nn_epochs\\":100}" --simulator_architecture "[{\\"units\\":50,\\"activation\\":\\"relu\\"}]" --tree_config "{\\"tree_n_estimators\\":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```
 
 See `src/experiments/shared/cmd_configs.py` for more details on the arguments.
@@ -154,7 +154,7 @@ The experiments were conducted on a machine with the following specifications:
 
 It is not required to have GPU, nor use multiple cores as in our case, however, please note that the performance can be slower. Additionally, with the random seed and the use of parallelization with joblib, the performance may vary slightly on other operating systems due to differences in computational handling or specific library implementations.
 
-We would also like to point out that for `MultiET`'s model, the SEMF results may vary but should fall within therange provided in the paper when choosing `parallel_type="semf_joblib"` and `n_jobs>1`, even accross different runs for the same seed and on the same machine. The only way to get exactly the same results accross is to not parallelize and run the program on a single core, which can significantly slow down the training process. See this issue for this topic: https://github.com/scikit-learn/scikit-learn/issues/22303 . For `MultiXGBs` and `MultiMLPs` models, the results will be the same every time, and if not very similar, especially accross under the same setting.
+We would also like to point out that for `MultiET`'s model, the SEMF results may vary but should fall within the range provided in the paper when choosing `parallel_type="semf_joblib"` and `n_jobs>1`, even across different runs for the same seed and on the same machine. The only way to get the same results is to not parallelize and run the program on a single core, which can significantly slow down the training process. See this issue for this topic: https://github.com/scikit-learn/scikit-learn/issues/22303 . For `MultiXGBs` and `MultiMLPs` models,  under the same setting, the results will be the same every time, and if not very similar.
 
 ## Contributing
 This repository is released under the MIT License. If you want to contribute to this project, please follow these steps:
