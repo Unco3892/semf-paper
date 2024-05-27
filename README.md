@@ -4,8 +4,8 @@ This repository is the official implementation of SEMF: Supervised Expectation-M
 
 <!-- ![](paper/assets/semf-tikz-plot.png) -->
 
-<p align="center">
-  <img src="paper/assets/semf-tikz-plot.png" />
+<p align="left">
+  <img src="paper/assets/semf-tikz-plot.png" width="600" />
 </p>
 
 ## Requirements
@@ -29,10 +29,27 @@ then install dependencies:
 pip install -r requirements.txt
 ```
 
+To run the tests, and to make sure everything is working, execute the following command from the root directory of the repository:
+```bash
+pytest
+```
+
 ## Training and Evaluation
 
-Choose between `run_experiments.py` for local execution or `run_experiments_wandb.py` (option 2) for execution with wandb integration based on your needs. These two scripts act as `train.py` and `evaluate.py` scripts found in most ML papers. The environment has been tested on both Windows (11) and Linux (Ubuntu 22.04.4 LTS) OS, with a note that results may vary between different OS. If wandb is chosen, view results directly on the wandb platform, including benchmark comparisons. Follow the specific instructions in `evaluate_results_local.py`. 
+Choose between `src/experiments/local/run_experiments_local.py` for local execution (option 1) or `src/experiments/wandb/run_experiments_wandb.py` for execution with wandb integration (option 2) based on your needs. These two scripts act as `train.py` and `evaluate.py` scripts found in most ML papers. The environment has been tested on both Windows (11) and Linux (Ubuntu 22.04.4 LTS) OS, with a note that results may vary between different OS. If wandb is chosen, view results directly on the wandb platform, including benchmark comparisons. Follow the specific instructions in `evaluate_results_local.py`. 
 
+`run_experiments_local.py` also support argparser for customizable experiment runs:
+
+Unix (Linux, MacOS):
+```bash
+python run_experiments_local.py --nn_config '{"nn_batch_size":32,"nn_epochs":100}' --simulator_architecture '[{"units":50,"activation":"relu"}]' --tree_config '{"tree_n_estimators":100}' --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
+```
+Windows
+```bash
+python run_experiments_local.py --nn_config "{\\"nn_batch_size\\":32,\\"nn_epochs\\":100}" --simulator_architecture "[{\\"units\\":50,\\"activation\\":\\"relu\\"}]" --tree_config "{\\"tree_n_estimators\\":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
+```
+
+See `src/experiments/shared/cmd_configs.py` for more details on the arguments.
 
 ### WANDB
 To run experiments and evaluate results on wandb, navigate to `src/experiments/wandb` and execute the scripts as per your experimental setup and explained in the project structure below. You can re-run the training and the sweeps using wandb:
@@ -123,7 +140,7 @@ semf_unzipped/
 - `shared/` : Contains the shared scripts for both WANDB and local experiments.
 - `benchmark.py` : Benchmarking class for SEMF.
 - `cmd_configs.py` : Argument parsing for customizable experiment runs.
-- `generate_data.py` : Generates simulated data that is used both by the `example.py` and `run_experiments.py`.
+- `generate_data.py` : Generates simulated data that is used both by the `example.py` and `run_experiments_local.py`.
 
 ## Important Notes for Replication
 The experiments were conducted on a machine with the following specifications:
