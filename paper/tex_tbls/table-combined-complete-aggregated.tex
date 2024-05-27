@@ -1,0 +1,66 @@
+
+\begin{table*}[!htbp]
+\caption{Test results for all models with complete data at 95\% quantiles aggregated over five seeds. For each metric, the mean and standard deviation of the performance across the seeds are separated by ±. Performance over the baseline is highlighted in bold.}
+\label{table-combined-complete-aggregated}
+\vskip 0.15in
+\begin{small}
+\begin{sc}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccccc}
+\toprule
+
+\multicolumn{1}{c}{} & \multicolumn{6}{c}{Interval Predictions} & \multicolumn{3}{c}{Point Predictions} \\
+\cmidrule(lr){2-7} \cmidrule(lr){8-10}
+ & \multicolumn{3}{c}{Relative} & \multicolumn{3}{c}{Absolute} & \multicolumn{2}{c}{Relative} & Absolute \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9} \cmidrule(lr){10-10}
+Dataset & $\Delta$CWR & $\Delta$PICP & $\Delta$NMPIW & PICP & MPIW & NMPIW & $\Delta$RMSE & $\Delta$MAE & $\text{R}^2$ \\
+\midrule
+\textbf{MultiXGBs} & & & & & & & & & \\ \cmidrule(lr){1-10}
+
+space\_ga & -1\%±6\% & \textbf{6\%±2\%} & -7\%±6\% & 0.89±0.01 & 1.80±0.12 & 0.20±0.01 & -9\%±1\% & -10\%±2\% & 0.60±0.01 \\
+cpu\_activity & \textbf{25\%±7\%} & \textbf{9\%±1\%} & \textbf{12\%±5\%} & 0.89±0.01 & 0.37±0.01 & 0.07±0.00 & \textbf{21\%±1\%} & -1\%±3\% & 0.98±0.00 \\
+naval\_propulsion\_plant & \textbf{156\%±15\%} & \textbf{8\%±1\%} & \textbf{58\%±2\%} & 0.96±0.00 & 0.39±0.01 & 0.11±0.00 & -14\%±4\% & -12\%±2\% & 0.99±0.00 \\
+miami\_housing & \textbf{61\%±6\%} & -7\%±2\% & \textbf{43\%±3\%} & 0.82±0.01 & 0.45±0.01 & 0.06±0.00 & \textbf{4\%±5\%} & \textbf{3\%±3\%} & 0.91±0.01 \\
+kin8nm & \textbf{10\%±3\%} & \textbf{5\%±2\%} & \textbf{4\%±4\%} & 0.90±0.01 & 1.94±0.07 & 0.38±0.01 & -20\%±2\% & -22\%±2\% & 0.63±0.01 \\
+concrete\_compressive\_strength & \textbf{13\%±5\%} & \textbf{26\%±6\%} & -11\%±8\% & 0.91±0.01 & 1.25±0.03 & 0.25±0.01 & -26\%±7\% & -40\%±13\% & 0.85±0.01 \\
+cars & \textbf{18\%±9\%} & \textbf{15\%±4\%} & \textbf{2\%±9\%} & 0.89±0.02 & 0.70±0.05 & 0.12±0.01 & -3\%±3\% & -1\%±4\% & 0.95±0.00 \\
+energy\_efficiency & \textbf{247\%±99\%} & \textbf{22\%±7\%} & \textbf{60\%±20\%} & 0.88±0.02 & 0.16±0.04 & 0.05±0.01 & -15\%±25\% & -16\%±19\% & 1.00±0.00 \\
+california\_housing & \textbf{31\%±5\%} & 0\%±1\% & \textbf{23\%±4\%} & 0.88±0.01 & 1.17±0.02 & 0.28±0.00 & -1\%±1\% & -1\%±1\% & 0.81±0.00 \\
+airfoil\_self\_noise & \textbf{61\%±45\%} & \textbf{4\%±10\%} & \textbf{31\%±18\%} & 0.81±0.07 & 0.89±0.22 & 0.19±0.05 & -64\%±36\% & -73\%±46\% & 0.86±0.05 \\
+QSAR\_fish\_toxicity & \textbf{10\%±4\%} & \textbf{11\%±4\%} & -1\%±3\% & 0.76±0.01 & 1.46±0.03 & 0.23±0.00 & \textbf{3\%±4\%} & \textbf{1\%±5\%} & 0.55±0.02 \\
+\cmidrule(lr){1-10}
+\textbf{MultiETs} & & & & & & & & & \\ \cmidrule(lr){1-10}
+
+space\_ga & \textbf{9\%±4\%} & -2\%±1\% & \textbf{9\%±4\%} & 0.91±0.01 & 2.04±0.07 & 0.22±0.01 & -16\%±2\% & -18\%±3\% & 0.54±0.02 \\
+cpu\_activity & \textbf{27\%±3\%} & -8\%±0\% & \textbf{27\%±2\%} & 0.90±0.01 & 0.47±0.01 & 0.09±0.00 & -14\%±2\% & -20\%±2\% & 0.98±0.00 \\
+naval\_propulsion\_plant & \textbf{219\%±36\%} & -9\%±0\% & \textbf{71\%±3\%} & 0.91±0.00 & 0.66±0.07 & 0.19±0.02 & -320\%±45\% & -409\%±40\% & 0.96±0.01 \\
+miami\_housing & \textbf{69\%±4\%} & -13\%±0\% & \textbf{48\%±1\%} & 0.86±0.00 & 0.65±0.02 & 0.08±0.00 & -10\%±2\% & -20\%±2\% & 0.90±0.00 \\
+kin8nm & \textbf{10\%±2\%} & -9\%±0\% & \textbf{17\%±2\%} & 0.88±0.01 & 2.27±0.05 & 0.44±0.01 & -35\%±2\% & -38\%±2\% & 0.48±0.01 \\
+concrete\_compressive\_strength & \textbf{9\%±10\%} & -12\%±2\% & \textbf{19\%±9\%} & 0.81±0.02 & 1.18±0.11 & 0.24±0.02 & -67\%±7\% & -94\%±10\% & 0.76±0.02 \\
+cars & \textbf{11\%±7\%} & \textbf{16\%±2\%} & -5\%±7\% & 0.83±0.02 & 0.53±0.04 & 0.09±0.01 & \textbf{3\%±4\%} & \textbf{1\%±2\%} & 0.95±0.00 \\
+energy\_efficiency & -4\%±6\% & 0\%±8\% & -5\%±15\% & 0.65±0.04 & 0.08±0.01 & 0.02±0.00 & \textbf{3\%±4\%} & 0\%±2\% & 1.00±0.00 \\
+california\_housing & \textbf{31\%±2\%} & -7\%±0\% & \textbf{29\%±1\%} & 0.90±0.00 & 1.70±0.03 & 0.41±0.01 & -15\%±1\% & -21\%±1\% & 0.71±0.01 \\
+airfoil\_self\_noise & \textbf{18\%±28\%} & -15\%±5\% & \textbf{25\%±18\%} & 0.83±0.05 & 1.22±0.31 & 0.26±0.07 & -117\%±50\% & -141\%±57\% & 0.80±0.09 \\
+QSAR\_fish\_toxicity & \textbf{12\%±2\%} & -9\%±1\% & \textbf{19\%±2\%} & 0.82±0.01 & 1.81±0.02 & 0.28±0.00 & -6\%±1\% & -11\%±1\% & 0.53±0.01 \\
+\cmidrule(lr){1-10}
+\textbf{MultiMLPs} & & & & & & & & & \\ \cmidrule(lr){1-10}
+
+space\_ga & \textbf{8\%±1\%} & 0\%±3\% & \textbf{7\%±3\%} & 0.81±0.02 & 1.25±0.02 & 0.14±0.00 & 0\%±1\% & -1\%±1\% & 0.75±0.01 \\
+cpu\_activity & \textbf{8\%±3\%} & -9\%±4\% & \textbf{15\%±6\%} & 0.72±0.02 & 0.24±0.01 & 0.05±0.00 & \textbf{7\%±2\%} & \textbf{5\%±2\%} & 0.98±0.00 \\
+naval\_propulsion\_plant & \textbf{21\%±20\%} & 0\%±3\% & \textbf{16\%±15\%} & 0.92±0.01 & 0.22±0.03 & 0.07±0.01 & -45\%±28\% & -36\%±23\% & 1.00±0.00 \\
+miami\_housing & \textbf{9\%±4\%} & \textbf{2\%±3\%} & \textbf{6\%±6\%} & 0.81±0.02 & 0.41±0.03 & 0.05±0.00 & -3\%±2\% & \textbf{4\%±2\%} & 0.91±0.00 \\
+kin8nm & \textbf{2\%±8\%} & \textbf{8\%±6\%} & -6\%±12\% & 0.81±0.02 & 0.68±0.03 & 0.13±0.01 & \textbf{7\%±3\%} & \textbf{7\%±2\%} & 0.93±0.00 \\
+concrete\_compressive\_strength & \textbf{98\%±15\%} & -23\%±8\% & \textbf{61\%±5\%} & 0.56±0.04 & 0.28±0.01 & 0.06±0.00 & \textbf{12\%±6\%} & \textbf{15\%±4\%} & 0.91±0.01 \\
+cars & 0\%±15\% & \textbf{6\%±13\%} & -9\%±33\% & 0.76±0.09 & 0.40±0.10 & 0.07±0.02 & -3\%±3\% & 0\%±3\% & 0.95±0.00 \\
+energy\_efficiency & \textbf{82\%±20\%} & \textbf{25\%±26\%} & \textbf{31\%±12\%} & 0.62±0.05 & 0.06±0.00 & 0.02±0.00 & \textbf{32\%±4\%} & \textbf{33\%±3\%} & 1.00±0.00 \\
+california\_housing & -14\%±3\% & \textbf{8\%±1\%} & -26\%±4\% & 0.89±0.01 & 1.31±0.02 & 0.31±0.01 & \textbf{7\%±0\%} & \textbf{9\%±1\%} & 0.82±0.00 \\
+airfoil\_self\_noise & \textbf{74\%±46\%} & 0\%±7\% & \textbf{39\%±17\%} & 0.75±0.02 & 0.35±0.01 & 0.08±0.00 & \textbf{18\%±4\%} & \textbf{16\%±5\%} & 0.97±0.00 \\
+QSAR\_fish\_toxicity & -6\%±4\% & \textbf{11\%±4\%} & -19\%±5\% & 0.76±0.04 & 1.49±0.06 & 0.23±0.01 & \textbf{4\%±5\%} & \textbf{7\%±5\%} & 0.55±0.04 \\
+
+\bottomrule
+\end{tabular}
+}
+\end{sc}
+\end{small}
+\end{table*}
