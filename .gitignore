@@ -1,0 +1,18 @@
+wandb/
+.vscode/
+tabular_benchmark_src/
+data/tabular_benchmark/
+models/
+
+# Ignore plots
+src/experiments/plots/
+
+# Ignore pycache
+**/__pycache__/
+# src/experiments/predicted_quantiles.png
+# src/experiments/violin_plot.png
+
+# Ignore venv
+venv/
+src/venv/
+src/experiments/local/venv/
