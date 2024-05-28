@@ -21,8 +21,8 @@ conda activate semf_env
 ```
 venv:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+python -m venv semf_env
+source semf_env/bin/activate  # On Windows, use `venv\Scripts\activate`
 ```
 then install dependencies:
 ```bash

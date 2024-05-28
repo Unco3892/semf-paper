@@ -14,5 +14,6 @@ src/experiments/plots/
 
 # Ignore venv
 venv/
+semf_env/
 src/venv/
 src/experiments/local/venv/
