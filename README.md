@@ -4,8 +4,8 @@ This repository is the official implementation of SEMF: Supervised Expectation-M
 
 <!-- ![](paper/assets/semf-tikz-plot.png) -->
 
-<p align="left">
-  <img src="paper/assets/semf-tikz-plot.png" width="600" />
+<p align="center">
+  <img src="paper/assets/semf-tikz-plot.png" width="500" />
 </p>
 
 ## Requirements
