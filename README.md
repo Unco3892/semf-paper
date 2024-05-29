@@ -38,6 +38,7 @@ pytest
 
 Choose between `src/experiments/local/run_experiments_local.py` for local execution (option 1) or `src/experiments/wandb/run_experiments_wandb.py` for execution with wandb integration (option 2). These two scripts act as `train.py` and `evaluate.py` scripts found in most ML papers. The environment has been tested on both Windows (11) and Linux (Ubuntu 22.04.4 LTS), with a note that results may vary between different OS. If wandb is chosen, view results directly on the wandb platform, including benchmark comparisons. Follow the specific instructions in `src/experiments/local/evaluate_results_local.py` or `src/experiments/wandb/evaluate_results_wandb.py` to evaluate the results.
 
+### Local
 Note that `run_experiments_local.py` also support [argparser](https://docs.python.org/3/library/argparse.html) for customizable experiment runs:
 
 Unix (Linux, MacOS):
@@ -59,6 +60,20 @@ To run experiments and evaluate results on wandb, navigate to `src/experiments/w
 3. Move into `src/experiments/wandb` 
 4. Run `python run_experiments_wandb.py`.
 5. You can run each sweep by running `wandb agent <USERNAME/PROJECTNAME/SWEEPID>` in `src/experiments/wandb`. More infos [in the wandb doc](https://docs.wandb.ai/guides/sweeps) . Specify the count as well (in our case, 500).
+
+### Important Notes for Replication
+The experiments were conducted on a machine with the following specifications:
+
+- Operating System: Microsoft Windows 11 Home, Version 10.0.22631
+- Processor: 13th Gen Intel(R) Core(TM) i9-13900KF
+- RAM: 32 GB
+- GPU: NVIDIA GeForce RTX 4090
+- Python Version: 3.9.19
+- Dependencies: As listed in requirements.txt
+
+It is not required to have GPU, nor use multiple cores as in our case, however, please note that the performance can be slower. Additionally, with the random seed and the use of parallelization with joblib, the performance may vary slightly on other operating systems due to differences in computational handling or specific library implementations.
+
+We would also like to point out that for `MultiET`'s model, the SEMF results may vary but should fall within the range provided in the paper when choosing `parallel_type="semf_joblib"` and `n_jobs>1`, even across different runs for the same seed and on the same machine. The only way to get the same results is to not parallelize and run the program on a single core, which can significantly slow down the training process. See this issue for this topic: https://github.com/scikit-learn/scikit-learn/issues/22303 . For `MultiXGBs` and `MultiMLPs` models,  under the same setting, the results will be the same every time, if not very similar.
 
 ## Directory Structure 
 
@@ -142,19 +157,6 @@ semf_unzipped/
 - `cmd_configs.py` : Argument parsing for customizable experiment runs.
 - `generate_data.py` : Generates simulated data that is used both by the `example.py` and `run_experiments_local.py`.
 
-## Important Notes for Replication
-The experiments were conducted on a machine with the following specifications:
-
-- Operating System: Microsoft Windows 11 Home, Version 10.0.22631
-- Processor: 13th Gen Intel(R) Core(TM) i9-13900KF
-- RAM: 32 GB
-- GPU: NVIDIA GeForce RTX 4090
-- Python Version: 3.9.19
-- Dependencies: As listed in requirements.txt
-
-It is not required to have GPU, nor use multiple cores as in our case, however, please note that the performance can be slower. Additionally, with the random seed and the use of parallelization with joblib, the performance may vary slightly on other operating systems due to differences in computational handling or specific library implementations.
-
-We would also like to point out that for `MultiET`'s model, the SEMF results may vary but should fall within the range provided in the paper when choosing `parallel_type="semf_joblib"` and `n_jobs>1`, even across different runs for the same seed and on the same machine. The only way to get the same results is to not parallelize and run the program on a single core, which can significantly slow down the training process. See this issue for this topic: https://github.com/scikit-learn/scikit-learn/issues/22303 . For `MultiXGBs` and `MultiMLPs` models,  under the same setting, the results will be the same every time, if not very similar.
 
 ## Contributing
 This repository is released under the MIT License. If you want to contribute to this project, please follow these steps:
