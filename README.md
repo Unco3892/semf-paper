@@ -1,6 +1,6 @@
 # SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals
 
-This repository is the official implementation of SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals.
+Accompanying implementation of [SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals](https://arxiv.org/abs/2405.18176).
 
 <!-- ![](paper/assets/semf-tikz-plot.png) -->
 
