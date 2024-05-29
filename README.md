@@ -1,6 +1,6 @@
 # SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals
 
-Accompanying implementation of [SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals](https://arxiv.org/abs/2405.18176).
+The official implementation of [SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals](https://arxiv.org/abs/2405.18176).
 
 <!-- ![](paper/assets/semf-tikz-plot.png) -->
 
@@ -45,7 +45,7 @@ Unix (Linux, MacOS):
 ```bash
 python run_experiments_local.py --dataset="space_ga" --nn_config '{"nn_batch_size":32,"nn_epochs":100}' --simulator_architecture '[{"units":50,"activation":"relu"}]' --tree_config '{"tree_n_estimators":100}' --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```
-Windows
+Windows:
 ```bash
 python run_experiments_local.py --dataset="space_ga" --nn_config "{\\"nn_batch_size\\":32,\\"nn_epochs\\":100}" --simulator_architecture "[{\\"units\\":50,\\"activation\\":\\"relu\\"}]" --tree_config "{\\"tree_n_estimators\\":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```
