@@ -211,53 +211,53 @@ def train_on_dataset_wandb(config, SEED):
             if config.return_interval_benchmark:
                 results_intervals = benchmark.run_intervals()
                 display_results(results_intervals, sort_descending_by="CWR", include_imputation=True)
-                fig = benchmark.plot_predicted_intervals(
-                    semf.x_valid, semf.y_valid, sample_size=100, return_fig=True
-                )
-                wandb.log({"quantile_intervals": wandb.Image(fig)}, commit=False)
+                # fig = benchmark.plot_predicted_intervals(
+                #     semf.x_valid, semf.y_valid, sample_size=100, return_fig=True
+                # )
+                # wandb.log({"quantile_intervals": wandb.Image(fig)}, commit=False)
                 wandb.log(utils.format_model_metrics(results_intervals), commit=False)
 
     except Exception as e:
         raise Exception(f"Error during benchmarking for dataset {ds_name}: {e}")
 
-    instance_n = 0
-    preds = semf.infer_semf(semf.x_test.iloc[[instance_n]], return_type="interval")
-    preds = preds.flatten()
-    fig_path = f"plots/kde_intervals_{ds_name}.png"
-    fig = visualize_prediction_intervals_kde(
-        y_preds=preds,
-        y_true=semf.y_test.loc[instance_n].values[0],
-        central_tendency="mean",
-        return_fig=True,
-        save_fig=True,
-        fig_path=fig_path,
-    )
-    wandb.log({"kde_intervals": wandb.Image(fig_path)}, commit=False)
+    # instance_n = 0
+    # preds = semf.infer_semf(semf.x_test.iloc[[instance_n]], return_type="interval")
+    # preds = preds.flatten()
+    # fig_path = f"plots/kde_intervals_{ds_name}.png"
+    # fig = visualize_prediction_intervals_kde(
+    #     y_preds=preds,
+    #     y_true=semf.y_test.loc[instance_n].values[0],
+    #     central_tendency="mean",
+    #     return_fig=True,
+    #     save_fig=True,
+    #     fig_path=fig_path,
+    # )
+    # wandb.log({"kde_intervals": wandb.Image(fig_path)}, commit=False)
 
-    plt_n_instances = 100
-    preds = semf.infer_semf(semf.x_test.iloc[0:plt_n_instances], return_type="interval")
-    actuals = semf.y_test.iloc[0:plt_n_instances].values
-    fig_path = f"plots/boxplot_intervals_{ds_name}.png"
-    fig = visualize_prediction_intervals(
-        preds,
-        actuals,
-        central_tendency="mean",
-        return_fig=True,
-        save_fig=True,
-        fig_path=fig_path,
-    )
-    wandb.log({"boxplot_intervals": wandb.Image(fig_path)}, commit=False)
+    # plt_n_instances = 100
+    # preds = semf.infer_semf(semf.x_test.iloc[0:plt_n_instances], return_type="interval")
+    # actuals = semf.y_test.iloc[0:plt_n_instances].values
+    # fig_path = f"plots/boxplot_intervals_{ds_name}.png"
+    # fig = visualize_prediction_intervals(
+    #     preds,
+    #     actuals,
+    #     central_tendency="mean",
+    #     return_fig=True,
+    #     save_fig=True,
+    #     fig_path=fig_path,
+    # )
+    # wandb.log({"boxplot_intervals": wandb.Image(fig_path)}, commit=False)
 
-    fig_path = f"plots/confidence_intervals_{ds_name}.png"
-    plot_confidence_intervals(
-        get_confidence_intervals(preds, actuals),
-        n_instances=plt_n_instances,
-        central_tendency="mean",
-        return_fig=True,
-        save_fig=True,
-        fig_path=fig_path,
-    )
-    wandb.log({"confidence_intervals": wandb.Image(fig_path)}, commit=False)
+    # fig_path = f"plots/confidence_intervals_{ds_name}.png"
+    # plot_confidence_intervals(
+    #     get_confidence_intervals(preds, actuals),
+    #     n_instances=plt_n_instances,
+    #     central_tendency="mean",
+    #     return_fig=True,
+    #     save_fig=True,
+    #     fig_path=fig_path,
+    # )
+    # wandb.log({"confidence_intervals": wandb.Image(fig_path)}, commit=False)
 
     print("-" * 40)
 

@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     base_dir = os.path.join(base_dir, "..")
-    file_path = os.path.join(base_dir, "results", "sweep_results_complete.csv")
+    file_path = os.path.join(base_dir, "results", "sweep_results.csv")
     data = pd.read_csv(file_path)
 
     best_runs_refactored = get_best_runs(data, args.include_missing_data)

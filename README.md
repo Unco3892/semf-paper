@@ -29,7 +29,12 @@ then install dependencies:
 pip install -r requirements.txt
 ```
 
-To run the tests, and to make sure everything is working, execute the following command from the root directory of the repository:
+Note that by default, `requirements.txt` installs the GPU version of `tensorflow` by default. If you do not have a GPU, change (comment+uncomment) the relevant lines in `requirements.txt` file. For more information, see https://www.tensorflow.org/install/pip . Additionally, since we used Windows 11 for experiments (and not WSL), the last supported version was tensorflow 2.10.0 .**We recommend using conda for installing cuda and cudnn for GPU support using if you don't already have the cuda toolkit.**
+```bash
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+```
+
+Finally, to run the tests and make sure everything is working, execute the following command from the root directory of the repository:
 ```bash
 pytest
 ```
@@ -69,9 +74,10 @@ The experiments were conducted on a machine with the following specifications:
 - RAM: 32 GB
 - GPU: NVIDIA GeForce RTX 4090
 - Python Version: 3.9.19
+- CUDA Version: 12.1 worked system-wide, and 11.2 worked with conda
 - Dependencies: As listed in requirements.txt
 
-It is not required to have GPU, nor use multiple cores as in our case, however, please note that the performance can be slower. Additionally, with the random seed and the use of parallelization with joblib, the performance may vary slightly on other operating systems due to differences in computational handling or specific library implementations.
+It is not required to have GPU, nor use multiple cores as in our case, however, please note that the performance can be slower. Additionally, with the random seed and the use of parallelization with `joblib`, the performance may vary slightly on other operating systems due to differences in computational handling or specific library implementations.
 
 We would also like to point out that for `MultiET`'s model, the SEMF results may vary but should fall within the range provided in the paper when choosing `parallel_type="semf_joblib"` and `n_jobs>1`, even across different runs for the same seed and on the same machine. The only way to get the same results is to not parallelize and run the program on a single core, which can significantly slow down the training process. See this issue for this topic: https://github.com/scikit-learn/scikit-learn/issues/22303 . For `MultiXGBs` and `MultiMLPs` models,  under the same setting, the results will be the same every time, if not very similar.
 
@@ -90,7 +96,8 @@ semf_unzipped/
 │   ├── .
 ├── results/
 │   ├── sweep_hyperparams_final.csv
-│   └── sweep_results_complete.csv
+│   ├── sweep_results_conformalized.csv
+│   └── sweep_results.csv
 └── src/
     ├── example.py
     ├── tests/
@@ -127,9 +134,11 @@ semf_unzipped/
 
 - `data/`: Contains the datasets used in our experiments. These are automatically generated once you run the experiment scripts within `src/experiments/`. 
 - `paper/`: Contains scripts for generating LaTeX tables fromthe results and the final hyperparameters. 
-- `results/`: Stores the results of all parameter sweeps and hyperparameter configurations. 
+- `results/`: Stores the results of all parameter sweeps and hyperparameter configurations.
 - `sweep_hyperparams_final.csv` : Contains the hyperparameters used in the final model (or complete which is used also for the missing in `src.experiments.local.evaluate_results_local.py` or `src.experiments.wandb.evaluate_results_wandb.py`).
-- `sweep_results_complete.csv` : Contains the results of the final model.
+- `sweep_results_complete.csv` : Contains the raw results of the SEMF model.
+- `sweep_results_conformalized.csv` : Contains the results of the final model with the conformalized intervals.
+- `sweep_results.csv` : Contains the results of the final model with the conformalized intervals.
 - `src/`: The source code required to replicate our experiments, including model training and evaluation scripts. 
 - `example.py`: An example script to demonstrate the usage of the SEMF model.
 - `tests/` : Contains tests for the main SEMF algorithm.

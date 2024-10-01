@@ -164,7 +164,7 @@ def train_on_dataset(ds_name, config, SEED=100):
     else:
         plot_optimal_i_value = optimal_i_value
 
-    plot_tr_val_metrics(semf, optimal_i_value=plot_optimal_i_value)
+    # plot_tr_val_metrics(semf, optimal_i_value=plot_optimal_i_value)
 
     print(f"Running benchmark for {ds_name}...")
     if config.return_point_benchmark:
@@ -210,31 +210,31 @@ def train_on_dataset(ds_name, config, SEED=100):
         if config.return_interval_benchmark:
             results_intervals = benchmark.run_intervals()
             display_results(results_intervals, sort_descending_by="CWR")
-            fig = benchmark.plot_predicted_intervals(
-                semf.x_valid, semf.y_valid, sample_size=100
-            )
+            # fig = benchmark.plot_predicted_intervals(
+            #     semf.x_valid, semf.y_valid, sample_size=100
+            # )
 
-    instance_n = 0
-    preds = semf.infer_semf(semf.x_test.iloc[[instance_n]], return_type="interval")
-    preds = preds.flatten()
-    visualize_prediction_intervals_kde(
-        y_preds=preds,
-        y_true=semf.y_test.loc[instance_n].values[0],
-        central_tendency="mean",
-    )
+    # instance_n = 0
+    # preds = semf.infer_semf(semf.x_test.iloc[[instance_n]], return_type="interval")
+    # preds = preds.flatten()
+    # visualize_prediction_intervals_kde(
+    #     y_preds=preds,
+    #     y_true=semf.y_test.loc[instance_n].values[0],
+    #     central_tendency="mean",
+    # )
 
-    plt_n_instances = 10
-    preds = semf.infer_semf(semf.x_test.iloc[0:plt_n_instances], return_type="interval")
-    actuals = semf.y_test.iloc[0:plt_n_instances].values
-    visualize_prediction_intervals(preds, actuals, central_tendency="mean")
+    # plt_n_instances = 10
+    # preds = semf.infer_semf(semf.x_test.iloc[0:plt_n_instances], return_type="interval")
+    # actuals = semf.y_test.iloc[0:plt_n_instances].values
+    # visualize_prediction_intervals(preds, actuals, central_tendency="mean")
 
-    plot_violin(y_preds=preds, y_true=semf.y_test.iloc[0:plt_n_instances].values if semf.y_test is not None else None, n_instances=plt_n_instances)
+    # plot_violin(y_preds=preds, y_true=semf.y_test.iloc[0:plt_n_instances].values if semf.y_test is not None else None, n_instances=plt_n_instances)
 
-    plot_confidence_intervals(
-        get_confidence_intervals(preds, actuals),
-        n_instances=plt_n_instances,
-        central_tendency="mean",
-    )
+    # plot_confidence_intervals(
+    #     get_confidence_intervals(preds, actuals),
+    #     n_instances=plt_n_instances,
+    #     central_tendency="mean",
+    # )
 
     print("-" * 40)
 

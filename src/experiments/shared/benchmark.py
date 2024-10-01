@@ -208,7 +208,7 @@ class BenchmarkSEMF:
             model = model.train_model(X_train_tensor, y_train_tensor, batch_size=self.nn_batch_size, epochs=self.nn_epochs, lr=self.nn_lr, load_into_memory=self.nn_load_into_memory, nn_patience=self.nn_patience, val_split=self.models_val_split, verbose=False)
         else:
             model.fit(X_train, y_train)
-
+        
         self.trained_models[full_model_name] = model
 
     def get_semf_intervals(self, X):
@@ -338,6 +338,37 @@ class BenchmarkSEMF:
         except KeyError:
             raise ValueError(f"Model name '{model_name}' not recognized or imputation method '{impute_method}' is incorrect.")
 
+    def conformal_prediction(self, model_name, X_cal, y_cal, X_test, impute_method):
+        """
+        Runs conformal prediction for a given model and input data.
+
+        Parameters:
+        - model_name (str): The name of the model.
+        - X_cal (DataFrame): The calibration data features.
+        - y_cal (Series): The calibration data target variable.
+        - X_test (DataFrame): The test data features.
+        - impute_method (str): The imputation method used.
+
+        """
+        lower_cal, upper_cal = self.predict_intervals(model_name, X_cal, impute_method=impute_method)
+        lower_test, upper_test = self.predict_intervals(model_name, X_test, impute_method=impute_method)
+        
+        # print the shape of the predictions        
+        # Calculate conformity scores
+        scores_cal = np.maximum(lower_cal - y_cal, y_cal - upper_cal)
+        
+        # Compute quantile
+        n = len(y_cal)
+        q = np.ceil((n + 1) * (1 - self.alpha)) / n
+        qhat = np.quantile(scores_cal, q, interpolation='higher')
+
+        # Compute conformal prediction intervals
+        lower_conformal = lower_test - qhat
+        upper_conformal = upper_test + qhat
+
+        return lower_conformal, upper_conformal
+
+
     def evaluate_model_intervals(self, model_name, y, lower, upper, picp_desired=None, eta=0.5):
         """
         Evaluates a model's performance on interval predictions.
@@ -395,7 +426,7 @@ class BenchmarkSEMF:
 
     def run_intervals(self):
         """
-        Runs the benchmarking process for interval predictions.
+        Runs the benchmarking process for interval predictions, then refine it using conformal prediction.
 
         Returns:
         - dict: A dictionary containing the results of interval predictions for each dataset subset.
@@ -404,22 +435,34 @@ class BenchmarkSEMF:
         results = {'train': [], 'valid': [], 'test': []}
         default_relative_metric_value = (None, None, None)
 
+        # SEMF prediction
         for subset, df in {'train': self.df_train, 'valid': self.df_valid, 'test': self.df_test}.items():
             X, y = df.drop(self.y_col, axis=1), df[self.y_col]
-            lower, upper = self.predict_intervals("SEMF", X)
+            
+            # Use original validation set for SEMF, as it can handle missing values
+            X_val, y_val = self.df_valid.drop(self.y_col, axis=1), self.df_valid[self.y_col]
+            
+            lower, upper = self.conformal_prediction("SEMF", X_val, y_val, X, "original")
             result = self.evaluate_model_intervals("SEMF", y, lower, upper)
             result['Imputation'] = "Original"
             results[subset].append(result)
+            
             result['top1_relative_picp'] = default_relative_metric_value
             result['top1_relative_nmpiw'] = default_relative_metric_value
             result['top1_relative_cwr'] = default_relative_metric_value
 
+        # Baseline models prediction
         for impute_method, data in datasets.items():
             for model_name in self.models:
                 if model_name in ["Quantile_XGB", "Quantile_ET", "Quantile_MLP"]:
                     for subset, df in data.items():
                         X, y = df.drop(self.y_col, axis=1), df[self.y_col]
-                        lower, upper = self.predict_intervals(model_name, X, impute_method=impute_method)
+                        
+                        # Use the validation set corresponding to the current imputation method
+                        X_val = data['valid'].drop(self.y_col, axis=1)
+                        y_val = data['valid'][self.y_col]
+                        
+                        lower, upper = self.conformal_prediction(model_name, X_val, y_val, X, impute_method)
                         result = self.evaluate_model_intervals(model_name, y, lower, upper)
                         result['Imputation'] = impute_method.capitalize()
                         results[subset].append(result)

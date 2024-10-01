@@ -23,22 +23,23 @@ def generate_combined_latex_table(data, model_classes):
         escaped_model_class = model_class.replace('_', '\\_').replace('-', '\\-')
         if i > 0:
             combined_rows.append("\\cmidrule(lr){1-7}\n")
-        combined_rows.append(f"\\textbf{{{escaped_model_class}}} & & & & & & & \\\\ \\cmidrule(lr){{1-7}}\n")
+        # Fix: Remove unnecessary "&" symbols from model class header row
+        combined_rows.append(f"\\textbf{{{escaped_model_class}}} \\\\ \\cmidrule(lr){{1-7}}\n")
         for _, row in filtered_df.iterrows():
             xi_nodes = eval(row['simulator_architecture'])[0]['units']
             escaped_dataset = row['dataset'].replace('_', '\\_')
             combined_rows.append(f"{escaped_dataset} & {row['R']} & {row['nodes_per_feature']} & {row['z_norm_sd']} & {row['stopping_patience']} & {row['R_inference']} & {xi_nodes} \\\\\n")
 
     latex_table = r"""
-\begin{table*}[!htbp]
+\begin{table*}[t]
+\begin{center}
 \caption{Hyper-parameters for MultiXGBs, MultiETs, and MultiMLPs used for both complete and missing data.}
 \label{table-combined-hyperparameters}
 \vskip 0.15in
 \begin{small}
 \begin{sc}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccccc}
+\resizebox{0.9\textwidth}{!}{%
+\begin{tabular}{lcccccc}
 \toprule
 \multirow{2}{*}{Dataset} & \multicolumn{5}{c}{Complete and Missing} & \multicolumn{1}{c}{Missing} \\
 \cmidrule(lr){2-6} \cmidrule(lr){7-7}
@@ -54,9 +55,11 @@ def generate_combined_latex_table(data, model_classes):
 }
 \end{sc}
 \end{small}
+\end{center}
 \end{table*}
 """
     return latex_table
+
 
 def save_latex_table(latex_code, filename):
     """Saves the LaTeX table code to a .tex file."""

@@ -5,12 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def fetch_project_runs(project_name: str) -> pd.DataFrame:
+def fetch_project_runs(project_name: str, exclude_seeds: list = None) -> pd.DataFrame:
     """
     Fetches the runs data and configurations (hyperparameters) for a given project on wandb.
 
     Args:
         project_name (str): The name of the wandb project.
+        exclude_seeds (list): A list of seed values to exclude from the DataFrame.
 
     Returns:
         pandas.DataFrame: A DataFrame containing the runs data and configurations.
@@ -47,7 +48,8 @@ def fetch_project_runs(project_name: str) -> pd.DataFrame:
         "stopping_patience",
         "simulator_architecture",
         "R_inference",
-        "nn_n_epochs"
+        "nn_n_epochs",
+        "seed"  # Assuming 'seed' is one of the hyperparameters
     ]
 
     # Priority columns for each split
@@ -88,6 +90,10 @@ def fetch_project_runs(project_name: str) -> pd.DataFrame:
     # Reorder the DataFrame columns
     df = df[ordered_columns]
 
+    # Filter out rows with excluded seed values
+    if exclude_seeds:
+        df = df[~df['seed'].isin(exclude_seeds)]
+
     return df
 
 if __name__ == '__main__':
@@ -95,7 +101,11 @@ if __name__ == '__main__':
 
     project_name = os.getenv('WANDB_PROJECT')
 
-    data = fetch_project_runs(project_name)
+    # Example of seeds to exclude
+    # exclude_seeds = [30, 40]
+    exclude_seeds = None
+
+    data = fetch_project_runs(project_name, exclude_seeds=exclude_seeds)
 
     print(f"Data fetched successfully for project: {project_name}")
 
@@ -103,6 +113,6 @@ if __name__ == '__main__':
     results_dir = os.path.join(base_dir, '..', 'results')
     os.makedirs(results_dir, exist_ok=True)
 
-    data.to_csv(os.path.join(results_dir, 'sweep_results_complete.csv'), index=False)
+    data.to_csv(os.path.join(results_dir, 'sweep_results_conformalized.csv'), index=False)
 
     print(data)

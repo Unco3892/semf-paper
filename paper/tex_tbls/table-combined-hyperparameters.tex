@@ -1,19 +1,19 @@
 
-\begin{table*}[!htbp]
+\begin{table*}[t]
+\begin{center}
 \caption{Hyper-parameters for MultiXGBs, MultiETs, and MultiMLPs used for both complete and missing data.}
 \label{table-combined-hyperparameters}
 \vskip 0.15in
 \begin{small}
 \begin{sc}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccccc}
+\resizebox{0.9\textwidth}{!}{%
+\begin{tabular}{lcccccc}
 \toprule
 \multirow{2}{*}{Dataset} & \multicolumn{5}{c}{Complete and Missing} & \multicolumn{1}{c}{Missing} \\
 \cmidrule(lr){2-6} \cmidrule(lr){7-7}
  & R & $m_k$ & $\sigma_{k}$ & Patience & $R_\mathrm{infer}$ & $\xi_\mathrm{nodes}$ \\
 \midrule
-\textbf{MultiXGBs} & & & & & & & \\ \cmidrule(lr){1-7}
+\textbf{MultiXGBs} \\ \cmidrule(lr){1-7}
 space\_ga & 10 & 30 & 1.0 & 5 & 70 & 100 \\
 cpu\_activity & 5 & 30 & 1.0 & 5 & 70 & 50 \\
 naval\_propulsion\_plant & 5 & 30 & 0.01 & 5 & 50 & 100 \\
@@ -26,7 +26,7 @@ california\_housing & 5 & 10 & 0.1 & 10 & 50 & 100 \\
 airfoil\_self\_noise & 25 & 1 & 0.01 & 10 & 70 & 100 \\
 QSAR\_fish\_toxicity & 50 & 30 & 1.0 & 5 & 70 & 100 \\
 \cmidrule(lr){1-7}
-\textbf{MultiETs} & & & & & & & \\ \cmidrule(lr){1-7}
+\textbf{MultiETs} \\ \cmidrule(lr){1-7}
 space\_ga & 10 & 30 & 1.0 & 10 & 70 & 100 \\
 cpu\_activity & 5 & 30 & 1.0 & 10 & 70 & 50 \\
 naval\_propulsion\_plant & 5 & 30 & 0.01 & 10 & 50 & 100 \\
@@ -39,7 +39,7 @@ california\_housing & 5 & 10 & 0.1 & 5 & 50 & 100 \\
 airfoil\_self\_noise & 25 & 1 & 0.01 & 10 & 70 & 100 \\
 QSAR\_fish\_toxicity & 50 & 30 & 1.0 & 10 & 70 & 100 \\
 \cmidrule(lr){1-7}
-\textbf{MultiMLPs} & & & & & & & \\ \cmidrule(lr){1-7}
+\textbf{MultiMLPs} \\ \cmidrule(lr){1-7}
 space\_ga & 25 & 10 & 0.001 & 10 & 50 & 100 \\
 cpu\_activity & 5 & 20 & 0.001 & 5 & 50 & 50 \\
 naval\_propulsion\_plant & 5 & 20 & 0.001 & 5 & 50 & 100 \\
@@ -57,4 +57,5 @@ QSAR\_fish\_toxicity & 50 & 30 & 1.0 & 10 & 70 & 100 \\
 }
 \end{sc}
 \end{small}
+\end{center}
 \end{table*}
