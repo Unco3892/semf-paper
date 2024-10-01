@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # Here we generate a dataset with 10000 observations and 4 predictor variables.
     utils.set_seed(0)
     n = 10000
-    num_variables = 4
+    num_variables = 3
     data = generate_data(n, num_variables)
     
     # Print the shape and the first few rows of the generated data to understand its structure
