@@ -49,7 +49,7 @@ def fetch_project_runs(project_name: str, exclude_seeds: list = None) -> pd.Data
         "simulator_architecture",
         "R_inference",
         "nn_n_epochs",
-        "seed"  # Assuming 'seed' is one of the hyperparameters
+        "seed"
     ]
 
     # Priority columns for each split

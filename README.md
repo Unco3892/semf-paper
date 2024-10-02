@@ -28,8 +28,7 @@ then install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-Note that by default, `requirements.txt` installs the GPU version of `tensorflow` by default. If you do not have a GPU, change (comment+uncomment) the relevant lines in `requirements.txt` file. For more information, see https://www.tensorflow.org/install/pip . Additionally, since we used Windows 11 for experiments (and not WSL), the last supported version was tensorflow 2.10.0 .**We recommend using conda for installing cuda and cudnn for GPU support using if you don't already have the cuda toolkit.**
+Note that by default, `requirements.txt` installs the GPU version of `tensorflow` by default. If you do not have a GPU, change (comment+uncomment) the relevant lines in `requirements.txt` file. For more information, see https://www.tensorflow.org/install/pip . Additionally, since we used Windows 11 for experiments (and not WSL), the last supported version was tensorflow 2.10.0 .**We recommend using conda for installing cuda and cudnn for GPU support if you do not already have the cuda toolkit using the following *(run before installation the requirements)***
 ```bash
 conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
 ```
@@ -51,6 +50,10 @@ Unix (Linux, MacOS):
 python run_experiments_local.py --dataset="space_ga" --nn_config '{"nn_batch_size":32,"nn_epochs":100}' --simulator_architecture '[{"units":50,"activation":"relu"}]' --tree_config '{"tree_n_estimators":100}' --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```
 Windows:
+```bash
+python run_experiments_local.py --dataset="space_ga" --nn_config="{""nn_batch_size"":32,""nn_epochs"":100}" --simulator_architecture="[{""units"":50,""activation"":""relu""}]" --tree_config="{""tree_n_estimators"":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
+```
+Or if it does not work, you can use the following command:
 ```bash
 python run_experiments_local.py --dataset="space_ga" --nn_config "{\\"nn_batch_size\\":32,\\"nn_epochs\\":100}" --simulator_architecture "[{\\"units\\":50,\\"activation\\":\\"relu\\"}]" --tree_config "{\\"tree_n_estimators\\":100}" --force_n_jobs --no-save_models --verbose --test_with_wide_intervals --no-return_interval_benchmark --no-use_constant_weights
 ```

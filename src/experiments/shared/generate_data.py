@@ -40,7 +40,7 @@ def generate_data(n, num_variables):
         ('Uniform', lambda: np.random.uniform(-5, 5, n)),
         ('Exponential', lambda: np.random.exponential(1, n)),
         ('Poisson', lambda: np.random.poisson(2, n)),
-        ('Normal', lambda: np.random.normal(0, 3, n))
+        # ('Normal', lambda: np.random.normal(0, 3, n))
     ]
 
     num_distributions = len(distributions)

@@ -1,4 +1,4 @@
-wandb/
+# wandb/
 .vscode/
 tabular_benchmark_src/
 data/tabular_benchmark/
@@ -6,6 +6,10 @@ models/
 
 # Ignore plots
 src/experiments/plots/
+
+# Ignore wandb runs
+src/experiments/wandb/plots/
+src/experiments/wandb/wandb
 
 # Ignore pycache
 **/__pycache__/
@@ -21,3 +25,4 @@ paper/semf_2024_arxiv.zip
 paper/semf-tikz-plot.pdf
 presentation/
 
+src/experiments/wandb/.env
