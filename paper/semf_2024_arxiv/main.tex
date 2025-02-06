@@ -360,6 +360,20 @@ The evaluation of point predictions employs Root Mean Squared Error (RMSE), Mean
 
 which evaluates the coverage probability ratio to the prediction interval's width. CWR provides a refined understanding of the balance between an interval's accuracy (coverage) and precision (width). Though a larger value of this metric is better in higher confidence levels, the marginal increase in NMPIW is likely higher than that of PICP, resulting in decreasing CWR.
 
+Additionally, following \cite{gneiting2007probabilistic}, we employ the Continuous Ranked Probability Score (CRPS), which simultaneously assesses calibration and sharpness of probabilistic forecasts. For a cumulative distribution function $F$ and observation $y$, the CRPS is defined as:
+
+\begin{equation}
+    \text{CRPS}(F,y) = \int_{-\infty}^{\infty} (F(t) - \mathds{1}\{y \leq t\})^2 dt,
+\end{equation}
+
+where $\mathds{1}\{y \leq t\}$ is the indicator function. For a set of $N$ predictions, we compute the average CRPS:
+
+\begin{equation}
+    \overline{\text{CRPS}} = \frac{1}{N}\sum_{i=1}^N \text{CRPS}(F_i,y_i),
+\end{equation}
+
+where $F_i$ is the predicted cumulative distribution function for the $i$-th instance and $y_i$ is its corresponding observation. Lower CRPS values indicate better performance, as they represent both better calibration and sharper predictions.
+
 In our case, measuring the performance of SEMF over the baseline models is far more critical than reviewing absolute metrics in isolation. For any metric above, except for ($\text{R}^2$), this is computed as 
 \small
 \begin{equation}

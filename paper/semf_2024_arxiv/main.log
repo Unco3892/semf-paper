@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.2.4)  6 FEB 2025 23:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2025.2.4)  6 FEB 2025 23:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**f:/research/semf-paper/paper/semf_2024_arxiv/main.tex
-(f:/research/semf-paper/paper/semf_2024_arxiv/main.tex
+**f:/research/semf-tmlr/paper/semf_2024_arxiv/main.tex
+(f:/research/semf-tmlr/paper/semf_2024_arxiv/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -610,8 +610,7 @@ runsystem(pdflatex -interaction=nonstopmode -output-directory assets assets/semf
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count343
 \l__pdf_internal_box=\box68
-)
-No file main.aux.
+) (main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
@@ -632,6 +631,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 144.
 LaTeX Font Info:    ... okay on input line 144.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 144.
 LaTeX Font Info:    ... okay on input line 144.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -699,6 +699,7 @@ LaTeX Font Info:    ... okay on input line 144.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 144.
+(main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
@@ -719,7 +720,7 @@ LaTeX Info: Redefining \showhyphens on input line 144.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
-(C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg
+ (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 ) (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -760,76 +761,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-Package natbib Warning: Citation `dusenberry2020uncertainehr' on page 1 undefined on input line 154.
-
-
-Package natbib Warning: Citation `wisniewski2020confirmalfinance' on page 1 undefined on input line 154.
-
-
-Package natbib Warning: Citation `tang2022prediction' on page 1 undefined on input line 154.
-
-
-Package natbib Warning: Citation `ghahramani2015probabilistic' on page 1 undefined on input line 154.
-
-
-Package natbib Warning: Citation `Dempster1977' on page 1 undefined on input line 156.
-
-
-Package natbib Warning: Citation `Blei2017' on page 1 undefined on input line 156.
-
-
-Package natbib Warning: Citation `kingma2014vae' on page 1 undefined on input line 156.
-
-
-Package natbib Warning: Citation `ghahramani1993em' on page 1 undefined on input line 156.
-
-
-
 [1
 
 
 {C:/Users/unco3/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 
-LaTeX Warning: Reference `method' on page 2 undefined on input line 159.
-
-
-LaTeX Warning: Reference `related_work' on page 2 undefined on input line 159.
-
-
-LaTeX Warning: Reference `experimental_setup' on page 2 undefined on input line 159.
-
-
-LaTeX Warning: Reference `results' on page 2 undefined on input line 159.
-
-
-LaTeX Warning: Reference `conclusion' on page 2 undefined on input line 159.
-
-
-LaTeX Warning: Reference `future_work' on page 2 undefined on input line 159.
-
-
-Package natbib Warning: Citation `Dempster1977' on page 2 undefined on input line 164.
-
-
-Package natbib Warning: Citation `wu1983convergence' on page 2 undefined on input line 164.
-
-
-LaTeX Warning: Reference `eqn:E_gen' on page 2 undefined on input line 182.
-
-
-LaTeX Warning: Reference `eqn:E_gen' on page 2 undefined on input line 182.
-
-
-
 [2]
-
-LaTeX Warning: Reference `eqn:E_MC_gen' on page 3 undefined on input line 196.
-
-
-LaTeX Warning: Reference `eqn:E_MC_gen_mis' on page 3 undefined on input line 196.
-
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 199.
-(C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/doublestroke\udsrom.fd
+ (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/doublestroke\udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/10'
@@ -840,106 +779,16 @@ Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
 (microtype)             (new value: 5.0pt) on input line 199.
 
 
-LaTeX Warning: Reference `eqn:overall_loss' on page 3 undefined on input line 207.
-
-
-Package natbib Warning: Citation `kingma2014vae' on page 3 undefined on input line 210.
-
-
-
 [3]
-
-LaTeX Warning: Reference `eq_xi' on page 4 undefined on input line 274.
-
-
-LaTeX Warning: Reference `eqn:p_xi_infer' on page 4 undefined on input line 274.
-
-
-LaTeX Warning: Reference `eqn:p_xi_sigmoid' on page 4 undefined on input line 274.
-
-
-LaTeX Warning: Reference `eq_sigma' on page 4 undefined on input line 278.
-
-
-LaTeX Warning: Reference `algo:semf-train' on page 4 undefined on input line 278.
-
-
-LaTeX Warning: Reference `appendix:semf-algo' on page 4 undefined on input line 278.
-
-
-LaTeX Warning: Reference `experiment_models' on page 4 undefined on input line 278.
-
-
-LaTeX Warning: Reference `fig:semf-overview' on page 4 undefined on input line 281.
-
-
-LaTeX Warning: Reference `algo:semf-infer' on page 4 undefined on input line 281.
-
-
-LaTeX Warning: Reference `appendix:semf-algo' on page 4 undefined on input line 281.
-
-
-LaTeX Warning: File `assets/semf-tikz-plot.pdf' not found on input line 296.
-
-
-f:/research/semf-paper/paper/semf_2024_arxiv/main.tex:296: Package pdftex.def Error: File `assets/semf-tikz-plot.pdf' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.296 ...8\columnwidth]{assets/semf-tikz-plot.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Package natbib Warning: Citation `kingma2014vae' on page 4 undefined on input line 307.
-
-
-Package natbib Warning: Citation `blei2017vireview' on page 4 undefined on input line 307.
-
-
-Package natbib Warning: Citation `balakrishnan2017emguarantees' on page 4 undefined on input line 308.
-
+<assets/semf-tikz-plot.pdf, id=213, 369.02167pt x 233.49734pt>
+File: assets/semf-tikz-plot.pdf Graphic file (type pdf)
+<use assets/semf-tikz-plot.pdf>
+Package pdftex.def Info: assets/semf-tikz-plot.pdf  used on input line 296.
+(pdftex.def)             Requested size: 317.9892pt x 201.21709pt.
 
 
 [4]
-
-Package natbib Warning: Citation `kingma2014semi' on page 5 undefined on input line 310.
-
-
-Package natbib Warning: Citation `zhuang2015supervisedautoencoder' on page 5 undefined on input line 310.
-
-
-Package natbib Warning: Citation `le2018supervisedae' on page 5 undefined on input line 310.
-
-
-Package natbib Warning: Citation `ji2020Multisupervisedvae' on page 5 undefined on input line 310.
-
-
-Package natbib Warning: Citation `zhuang2023semi' on page 5 undefined on input line 310.
-
-
-Package natbib Warning: Citation `ghahramani1993em' on page 5 undefined on input line 312.
-
-
-Package natbib Warning: Citation `williams2005' on page 5 undefined on input line 312.
-
-
-Package natbib Warning: Citation `louiset2021ucsl' on page 5 undefined on input line 312.
-
-
-Package natbib Warning: Citation `luo2020weakly' on page 5 undefined on input line 312.
-
-
-Package natbib Warning: Citation `he2022semisupem' on page 5 undefined on input line 312.
-
-
-Package natbib Warning: Citation `xu2024expectation' on page 5 undefined on input line 312.
-
-
-Underfull \vbox (badness 4328) has occurred while \output is active []
+Underfull \vbox (badness 2689) has occurred while \output is active []
 
 
 
@@ -947,129 +796,11 @@ Underfull \vbox (badness 4328) has occurred while \output is active []
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.314 \subsection
-                 {Prediction Intervals}]
-
-Package natbib Warning: Citation `williams1995gaussian' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `hensman2015scalable' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `gal2016dropoutbnn' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `breiman2001random' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `lakshminarayanan2017simple' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `malinin2021uncertainty' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `Koenker1978' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `koenker2001qr' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `vovk2005algorithmic' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `vovk2022conformal' on page 6 undefined on input line 316.
-
-
-Package natbib Warning: Citation `steinwart2011estimating' on page 6 undefined on input line 318.
-
-
-Package natbib Warning: Citation `koenker2001qr' on page 6 undefined on input line 318.
-
-
-Package natbib Warning: Citation `meinshausen2006quantile' on page 6 undefined on input line 318.
-
-
-Package natbib Warning: Citation `romano2019cqr' on page 6 undefined on input line 318.
-
-
-Package natbib Warning: Citation `yoon2020vime' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `jadhav2019comparison' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `ibrahim2008model' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `scikit-learn' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `Buuren2011' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `Buck1960' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `schafer1997analysis' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `Wang2019' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `pereira2020' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `smieja2018processing' on page 6 undefined on input line 321.
-
-
-Package natbib Warning: Citation `fischer2023' on page 6 undefined on input line 326.
-
-
-LaTeX Warning: Reference `appendix:semf-databench' on page 6 undefined on input line 326.
-
-
-Package natbib Warning: Citation `Chen2016' on page 6 undefined on input line 330.
-
-
-Package natbib Warning: Citation `geurts2006extremely' on page 6 undefined on input line 330.
-
-
-Package natbib Warning: Citation `tagasovska2019single' on page 6 undefined on input line 330.
-
-
-LaTeX Warning: Reference `tab:model_comparisons' on page 6 undefined on input line 330.
-
-
-Package natbib Warning: Citation `romano2019cqr' on page 6 undefined on input line 330.
-
-
-LaTeX Warning: Reference `semf_quantile' on page 6 undefined on input line 330.
-
-
-Package natbib Warning: Citation `klambauer2017self' on page 6 undefined on input line 330.
-
-
-
-[6]
-
-Package natbib Warning: Citation `scikit-learn' on page 7 undefined on input line 332.
-
-
-LaTeX Warning: Reference `appendix:optimal-semf' on page 7 undefined on input line 332.
-
-
+l.322 
+       <./assets/semf-tikz-plot.pdf>]
 Overfull \hbox (3.6056pt too wide) in paragraph at lines 351--351
 []\T1/ptm/m/n/10 (-20) MultiXGBs| 
  []
-
-
-Package natbib Warning: Citation `chen2016xgboost' on page 7 undefined on input line 351.
-
-
-Package natbib Warning: Citation `scikit-learn' on page 7 undefined on input line 351.
-
-
-Package natbib Warning: Citation `johnson2024et' on page 7 undefined on input line 351.
 
 
 Overfull \hbox (3.06654pt too wide) in paragraph at lines 351--351
@@ -1077,246 +808,152 @@ Overfull \hbox (3.06654pt too wide) in paragraph at lines 351--351
  []
 
 
-Package natbib Warning: Citation `tagasovska2019single' on page 7 undefined on input line 351.
+Underfull \vbox (badness 3386) has occurred while \output is active []
 
 
-Package natbib Warning: Citation `pearce2018high' on page 7 undefined on input line 355.
 
-
-Package natbib Warning: Citation `zhou2023real' on page 7 undefined on input line 355.
-
-
-LaTeX Warning: Reference `appendix:common-metrics' on page 7 undefined on input line 355.
-
+[6]
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
-(microtype)             (new value: 9.0pt) on input line 365.
+(microtype)             (new value: 9.0pt) on input line 379.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
-(microtype)             (new value: 6.0pt) on input line 365.
-
-LaTeX Warning: Reference `appendix:relative-metrics-impact' on page 7 undefined on input line 370.
-
-
-LaTeX Warning: Reference `table-combined-complete-aggregated' on page 7 undefined on input line 374.
-
-
-LaTeX Warning: Reference `table-combined-missing-aggregated' on page 7 undefined on input line 374.
-
-
-LaTeX Warning: Reference `appendix:full-results' on page 7 undefined on input line 374.
-
-
-LaTeX Warning: Reference `appendix:non-conformal-aggregated' on page 7 undefined on input line 374.
-
-
-Underfull \vbox (badness 1436) has occurred while \output is active []
-
+(microtype)             (new value: 6.0pt) on input line 379.
 
 
 [7
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.375 
-      ]
+l.389 
+      ] (assets/tex_tbls/table-combined-complete-aggregated.tex
+Underfull \hbox (badness 10000) in paragraph at lines 9--66
 
-LaTeX Warning: Reference `table-combined-complete-aggregated' on page 8 undefined on input line 377.
+ []
 
-(assets/tex_tbls/table-combined-complete-aggregated.tex
+) (assets/tex_tbls/table-combined-missing-aggregated.tex
 Underfull \hbox (badness 10000) in paragraph at lines 9--66
 
  []
 
 )
-
-LaTeX Warning: Reference `table-combined-missing-aggregated' on page 8 undefined on input line 381.
-
-(assets/tex_tbls/table-combined-missing-aggregated.tex
 
 [8
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1 
-    ]
-Underfull \hbox (badness 10000) in paragraph at lines 9--66
-
- []
-
-)
-
-LaTeX Warning: Reference `appendix:full-results' on page 9 undefined on input line 391.
-
-
-LaTeX Warning: Reference `appendix:non-conformal-aggregated' on page 9 undefined on input line 391.
-
-
+l.402 
+      ]
 
 [9
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.392 
-      ]
-
-LaTeX Warning: Reference `appendix:example-non-normality' on page 10 undefined on input line 398.
-
-No file main.bbl.
-
+l.406 
+      ] (main.bbl
 
 [10]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 418.
+
+[11]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 213.
+ (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+
+[12]
+Underfull \hbox (badness 6675) in paragraph at lines 341--347
+[]\T1/ptm/m/n/10 (+20) Kaggle.  Mon-ey-ball dataset.  []$\T1/cmtt/m/n/10 https : / / www . kaggle . com / datasets / wduckett /
+ []
 
 
-[11
+
+[13])
+
+[14]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 432.
+
+
+[15
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.472 \FOR
+l.486 \FOR
           {$r = 1, \ldots, R$}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.473     \IF
+l.487     \IF
              {$x_{1,i}$ is absent}
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.474         \STATE
+l.488         \STATE
                      Simulate $[j_{i,r}, x_{1,i,r}] \sim p_{\xi^*}(\cdot | x...
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.475         \STATE
+l.489         \STATE
                      Simulate $z_{1,i,r} \sim p_{\phi_1^*}(\cdot | x_{1,i,r})$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.476         \STATE
+l.490         \STATE
                      Simulate $z_{2,i,r} \sim p_{\phi_2^*}(\cdot | x_{2,i})$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.477         \STATE
+l.491         \STATE
                      Set $z_{i,r} = [z_{1,i,r}, z_{2,i,r}]$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.478     \ELSE
+l.492     \ELSE
                
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.479         \STATE
+l.493         \STATE
                      Simulate $z_{1,i,r} \sim p_{\phi_1^*}(\cdot | x_{1,i})$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.480         \STATE
+l.494         \STATE
                      Simulate $z_{2,i,r} \sim p_{\phi_2^*}(\cdot | x_{2,i})$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.481         \STATE
+l.495         \STATE
                      Set $z_{i,r} = [z_{1,i,r}, z_{2,i,r}]$
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.11}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.482     \ENDIF
+l.496     \ENDIF
                 
 pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.12}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.483 \ENDFOR
-             
+l.497 \ENDFOR
+              (assets/tex_tbls/table-combined-hyperparameters.tex)
 
-Package natbib Warning: Citation `fischer2023' on page 12 undefined on input line 490.
-
-
-Package natbib Warning: Citation `kaggle2017moneyball' on page 12 undefined on input line 490.
-
-
-LaTeX Warning: Reference `tab:datasets' on page 12 undefined on input line 490.
-
-
-Package natbib Warning: Citation `fischer2023' on page 12 undefined on input line 493.
-
-
-Package natbib Warning: Citation `kelleypace1997_space_ga' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `rasmussen1996computer' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `Coraddu2016' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `kaggle2022miami' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `ghahramani1996kin' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `yeh1998' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `Kuiper2008' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `Tsanas2012' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `kelleypace1997_california' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `brooks1989airfoil' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `Cassotti2015' on page 12 undefined on input line 517.
-
-
-Package natbib Warning: Citation `wandb' on page 12 undefined on input line 527.
-
-
-LaTeX Warning: Reference `table-combined-hyperparameters' on page 12 undefined on input line 527.
-
-(assets/tex_tbls/table-combined-hyperparameters.tex)
-
-Package natbib Warning: Citation `chen2016xgboost' on page 12 undefined on input line 531.
-
-
-
-[12
+[16
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.532 
+l.546 
       ]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 535.
- (C:\Users\unco3\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
 
-[13
+[17
 pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.537 \section
+l.551 \section
               {Metrics for prediction intervals}]
 
-Package natbib Warning: Citation `pearce2018high' on page 14 undefined on input line 541.
+[18]
 
-
-Package natbib Warning: Citation `zhou2023real' on page 14 undefined on input line 541.
-
-
-
-[14]
-
-[15] (assets/tex_tbls/table-multixgbs-complete.tex
+[19] (assets/tex_tbls/table-multixgbs-complete.tex
 Underfull \hbox (badness 10000) in paragraph at lines 9--80
 
  []
@@ -1348,46 +985,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--80
 
 )
 
-[16
+[20
 pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.583 \clearpage
-                ]
-
-[17
-pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.583 \clearpage
-                ]
-
-[18
-pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.583 \clearpage
-                ]
-
-[19
-pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.583 \clearpage
-                ]
-
-[20
-pdfTeX warning (ext4): destination with the same identifier (name{table.10}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.583 \clearpage
+l.597 \clearpage
                 ]
 
 [21
+pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.597 \clearpage
+                ]
+
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.597 \clearpage
+                ]
+
+[23
+pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.597 \clearpage
+                ]
+
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{table.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.597 \clearpage
+                ]
+
+[25
 pdfTeX warning (ext4): destination with the same identifier (name{table.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.583 \clearpage
+l.597 \clearpage
                 ] (assets/tex_tbls/table-combined-complete-raw-aggregated.tex
 Underfull \hbox (badness 10000) in paragraph at lines 9--66
 
@@ -1400,112 +1037,84 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--66
 
 )
 
-[22
+[26
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{table.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.590 \clearpage
+l.604 \clearpage
                 ]
 
-[23
+[27
 pdfTeX warning (ext4): destination with the same identifier (name{table.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.590 \clearpage
+l.604 \clearpage
                 ]
-
-Package natbib Warning: Citation `Coraddu2016' on page 24 undefined on input line 594.
-
-
-LaTeX Warning: Reference `y-distribution' on page 24 undefined on input line 594.
-
-<assets/npp_standardized_y_dist.png, id=250, 867.24pt x 433.62pt>
+<assets/npp_standardized_y_dist.png, id=593, 867.24pt x 433.62pt>
 File: assets/npp_standardized_y_dist.png Graphic file (type png)
 <use assets/npp_standardized_y_dist.png>
-Package pdftex.def Info: assets/npp_standardized_y_dist.png  used on input line 598.
+Package pdftex.def Info: assets/npp_standardized_y_dist.png  used on input line 612.
 (pdftex.def)             Requested size: 397.48499pt x 198.74641pt.
-
-LaTeX Warning: Reference `predicted-quantiles' on page 24 undefined on input line 604.
-
-
-LaTeX Warning: Reference `y-violin' on page 24 undefined on input line 604.
-
-<assets/npp_predicted_quantiles.png, id=252, 867.24pt x 578.16pt>
+<assets/npp_predicted_quantiles.png, id=597, 867.24pt x 578.16pt>
 File: assets/npp_predicted_quantiles.png Graphic file (type png)
 <use assets/npp_predicted_quantiles.png>
-Package pdftex.def Info: assets/npp_predicted_quantiles.png  used on input line 608.
+Package pdftex.def Info: assets/npp_predicted_quantiles.png  used on input line 622.
 (pdftex.def)             Requested size: 357.73405pt x 238.49394pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<assets/npp_violin_plot.png, id=253, 867.24pt x 722.7pt>
+<assets/npp_violin_plot.png, id=598, 867.24pt x 722.7pt>
 File: assets/npp_violin_plot.png Graphic file (type png)
 <use assets/npp_violin_plot.png>
-Package pdftex.def Info: assets/npp_violin_plot.png  used on input line 617.
+Package pdftex.def Info: assets/npp_violin_plot.png  used on input line 631.
 (pdftex.def)             Requested size: 337.86465pt x 281.55412pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[24
+[28
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.624 \newpage
+l.638 \newpage
                <./assets/npp_standardized_y_dist.png>]
 
-[25
+[29
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.625 \clearpage
+l.639 \clearpage
                 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.625 \clearpage
-                 <./assets/npp_predicted_quantiles.png> <./assets/npp_violin_plot.png>]
-
-Package natbib Warning: There were undefined citations.
-
-(main.aux)
+l.639 \clearpage
+                 <./assets/npp_predicted_quantiles.png> <./assets/npp_violin_plot.png>] (main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  F7059FA44BE390829FB2D03CD191F62D;4479.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: F7059FA44BE390829FB2D03CD191F62D;4479.
  ) 
 Here is how much of TeX's memory you used:
- 27390 strings out of 473530
- 515176 string characters out of 5714795
- 1142324 words of memory out of 5000000
- 49666 multiletter control sequences out of 15000+600000
- 632738 words of font info for 284 fonts, out of 8000000 for 9000
+ 27702 strings out of 473530
+ 521744 string characters out of 5714795
+ 1151619 words of memory out of 5000000
+ 49879 multiletter control sequences out of 15000+600000
+ 633253 words of font info for 294 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,13n,121p,1558b,617s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,13n,121p,1552b,795s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\unco3\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\unco3\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/doublestroke/dsrom10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/unco3/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (25 pages, 797473 bytes).
+Output written on main.pdf (29 pages, 885262 bytes).
 PDF statistics:
- 449 PDF objects out of 1000 (max. 8388607)
- 141 named destinations out of 1000 (max. 500000)
- 67100 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 809 PDF objects out of 1000 (max. 8388607)
+ 215 named destinations out of 1000 (max. 500000)
+ 65297 words of extra memory for PDF output out of 74296 (max. 10000000)
 

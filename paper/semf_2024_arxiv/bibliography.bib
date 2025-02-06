@@ -808,8 +808,8 @@ url={https://doi.org/10.1038/s41551-022-00988-x}
 
 
 @InProceedings{wisniewski2020confirmalfinance,
-  title = 	 {Application of conformal prediction interval estimations to market makers’ net positions},
-  author =       {Wisniewski, Wojciech and Lindsay, David and Lindsay, Sian},
+  title = 	 {Conformal prediction in financial risk assessment},
+  author = 	 {Wisniewski, Tomasz and Polanski, Arnold},
   booktitle = 	 {Proceedings of the Ninth Symposium on Conformal and Probabilistic Prediction and Applications},
   pages = 	 {285--301},
   year = 	 {2020},
@@ -820,12 +820,12 @@ url={https://doi.org/10.1038/s41551-022-00988-x}
   publisher =    {PMLR},
   pdf = 	 {http://proceedings.mlr.press/v128/wisniewski20a/wisniewski20a.pdf},
   url = 	 {https://proceedings.mlr.press/v128/wisniewski20a.html},
-  abstract = 	 { In this study we focus on the application of Conformal Prediction (CP) interval estimations to provide financial Market Makers (MMs) with some “meaningful” forecasts relating to their future short-term position in a given financial market. The idea is that using these market position forecasts, MMs can deploy proactive risk management strategies with a given degree of confidence. We make use of a novel financial time series dataset that comprises the net positions of a given MM over a three year period for trades pertaining to the top-traded Foreign Exchange (FX) symbols. This dataset – \nolinebreak{NetPositionTimeSeries} – is noisy and complex. The net positions within it are generated from the trades of tens of thousands of clients trading in different directions (buy or sell) and over many different time horizons. We approached the problem of predicting future net position not as one that required an accurate point estimate as this is impossible. Rather we sought to gain a meaningful range of possible position bounds which would nonetheless be invaluable. In this study we tested a range of predictive Machine Learning (ML) techniques. We compared the CP framework to benchmark methods like moving average (MA) and quantile regression (QR). We demonstrate how application of the CP framework gives well calibrated region bounds on the MM net position forecasts.}
+  abstract = 	 { In this study we focus on the application of Conformal Prediction (CP) interval estimations to provide financial Market Makers (MMs) with some "meaningful" forecasts relating to their future short-term position in a given financial market. The idea is that using these market position forecasts, MMs can deploy proactive risk management strategies with a given degree of confidence. We make use of a novel financial time series dataset that comprises the net positions of a given MM over a three year period for trades pertaining to the top-traded Foreign Exchange (FX) symbols. This dataset – \nolinebreak{NetPositionTimeSeries} – is noisy and complex. The net positions within it are generated from the trades of tens of thousands of clients trading in different directions (buy or sell) and over many different time horizons. We approached the problem of predicting future net position not as one that required an accurate point estimate as this is impossible. Rather we sought to gain a meaningful range of possible position bounds which would nonetheless be invaluable. In this study we tested a range of predictive Machine Learning (ML) techniques. We compared the CP framework to benchmark methods like moving average (MA) and quantile regression (QR). We demonstrate how application of the CP framework gives well calibrated region bounds on the MM net position forecasts.}
 }
 
 
 @inproceedings{dusenberry2020uncertainehr,
-author = {Dusenberry, Michael W. and Tran, Dustin and Choi, Edward and Kemp, Jonas and Nixon, Jeremy and Jerfel, Ghassen and Heller, Katherine and Dai, Andrew M.},
+author = {Dusenberry, Michael W and Tran, Dustin and Choi, Edward and Kemp, Jonas and Nixon, Jeremy and Jerfel, Ghassen and Heller, Katherine and Dai, Andrew M},
 title = {Analyzing the role of model uncertainty for electronic health records},
 year = {2020},
 isbn = {9781450370462},
@@ -1261,3 +1261,19 @@ URL = {https://doi.org/10.1214/16-AOS1435}
     year={2021},
     url={https://openreview.net/forum?id=1Jv6b0Zq3qi}
 }
+
+@article{gneiting2007probabilistic,
+author = {Gneiting, Tilmann and Balabdaoui, Fadoua and Raftery, Adrian E.},
+title = {Probabilistic forecasts, calibration and sharpness},
+journal = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+volume = {69},
+number = {2},
+pages = {243-268},
+keywords = {Cross-validation, Density forecast, Ensemble prediction system, Ex post evaluation, Forecast verification, Model diagnostics, Posterior predictive assessment, Predictive distribution, Prequential principle, Probability integral transform, Proper scoring rule},
+doi = {https://doi.org/10.1111/j.1467-9868.2007.00587.x},
+url = {https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9868.2007.00587.x},
+eprint = {https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-9868.2007.00587.x},
+abstract = {Summary.  Probabilistic forecasts of continuous variables take the form of predictive densities or predictive cumulative distribution functions. We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of maximizing the sharpness of the predictive distributions subject to calibration. Calibration refers to the statistical consistency between the distributional forecasts and the observations and is a joint property of the predictions and the events that materialize. Sharpness refers to the concentration of the predictive distributions and is a property of the forecasts only. A simple theoretical framework allows us to distinguish between probabilistic calibration, exceedance calibration and marginal calibration. We propose and study tools for checking calibration and sharpness, among them the probability integral transform histogram, marginal calibration plots, the sharpness diagram and proper scoring rules. The diagnostic approach is illustrated by an assessment and ranking of probabilistic forecasts of wind speed at the Stateline wind energy centre in the US Pacific Northwest. In combination with cross-validation or in the time series context, our proposal provides very general, nonparametric alternatives to the use of information criteria for model diagnostics and model selection.},
+year = {2007}
+}
+
