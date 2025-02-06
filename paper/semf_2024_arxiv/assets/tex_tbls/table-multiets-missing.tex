@@ -1,0 +1,80 @@
+
+\begin{table*}[!htbp]
+\caption{Test results for MultiETs with 50\% missing data at 95\% quantiles for seeds 0, 10, 20, 30, 40, with rows ordered by seed (ascending). Performance over the baseline is highlighted in bold.}
+\label{table-multiets-missing}
+\vskip 0.15in
+\begin{small}
+\begin{sc}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccccc}
+\toprule
+
+\multicolumn{1}{c}{} & \multicolumn{6}{c}{Interval Predictions} & \multicolumn{3}{c}{Point Predictions} \\
+\cmidrule(lr){2-7} \cmidrule(lr){8-10}
+ & \multicolumn{3}{c}{Relative} & \multicolumn{3}{c}{Absolute} & \multicolumn{2}{c}{Relative} & Absolute \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-9} \cmidrule(lr){10-10}
+Dataset & $\Delta$CWR & $\Delta$PICP & $\Delta$NMPIW & PICP & MPIW & NMPIW & $\Delta$RMSE & $\Delta$MAE & $\text{R}^2$ \\
+\midrule
+
+space\_ga & -7\% & -2\% & -6\% & 0.94 & 3.08 & 0.33 & -18\% & -19\% & 0.29 \\
+space\_ga & -12\% & \textbf{3\%} & -18\% & 0.97 & 3.41 & 0.37 & -7\% & -7\% & 0.40 \\
+space\_ga & -13\% & 0\% & -16\% & 0.95 & 3.05 & 0.33 & -13\% & -11\% & 0.42 \\
+space\_ga & -13\% & 0\% & -18\% & 0.96 & 3.21 & 0.35 & -8\% & -8\% & 0.41 \\
+space\_ga & -10\% & 0\% & -11\% & 0.96 & 2.91 & 0.32 & -15\% & -18\% & 0.46 \\
+cpu\_activity & -18\% & -3\% & -23\% & 0.95 & 1.03 & 0.19 & -40\% & -56\% & 0.92 \\
+cpu\_activity & -12\% & -6\% & -11\% & 0.91 & 1.04 & 0.20 & -15\% & -44\% & 0.81 \\
+cpu\_activity & -5\% & -5\% & -2\% & 0.92 & 1.00 & 0.19 & -43\% & -59\% & 0.75 \\
+cpu\_activity & -13\% & -2\% & -14\% & 0.96 & 0.97 & 0.18 & \textbf{2\%} & -19\% & 0.87 \\
+cpu\_activity & -30\% & -1\% & -42\% & 0.96 & 1.31 & 0.25 & -10\% & -43\% & 0.76 \\
+naval\_propulsion\_plant & -19\% & 0\% & -23\% & 0.98 & 3.17 & 0.94 & -63\% & -158\% & 0.71 \\
+naval\_propulsion\_plant & \textbf{11\%} & -5\% & \textbf{13\%} & 0.94 & 2.24 & 0.66 & -31\% & -78\% & 0.73 \\
+naval\_propulsion\_plant & \textbf{14\%} & -2\% & \textbf{14\%} & 0.97 & 2.26 & 0.67 & -61\% & -147\% & 0.80 \\
+naval\_propulsion\_plant & \textbf{24\%} & -9\% & \textbf{25\%} & 0.89 & 1.99 & 0.59 & -13\% & -42\% & 0.66 \\
+naval\_propulsion\_plant & -10\% & -2\% & -11\% & 0.95 & 2.75 & 0.81 & -19\% & -52\% & 0.64 \\
+miami\_housing & -15\% & -2\% & -17\% & 0.94 & 1.86 & 0.23 & -11\% & -25\% & 0.79 \\
+miami\_housing & -44\% & \textbf{5\%} & -87\% & 0.96 & 2.39 & 0.30 & -43\% & -64\% & 0.47 \\
+miami\_housing & -41\% & 0\% & -69\% & 0.96 & 2.30 & 0.29 & -27\% & -42\% & 0.72 \\
+miami\_housing & -35\% & -2\% & -52\% & 0.96 & 2.18 & 0.27 & -21\% & -33\% & 0.79 \\
+miami\_housing & -31\% & \textbf{1\%} & -48\% & 0.95 & 2.24 & 0.28 & -22\% & -30\% & 0.64 \\
+kin8nm & -15\% & -1\% & -19\% & 0.96 & 3.55 & 0.69 & -8\% & -8\% & 0.29 \\
+kin8nm & -14\% & \textbf{2\%} & -19\% & 0.96 & 3.43 & 0.67 & -10\% & -14\% & 0.32 \\
+kin8nm & -11\% & 0\% & -13\% & 0.94 & 3.20 & 0.63 & -9\% & -12\% & 0.32 \\
+kin8nm & -14\% & 0\% & -18\% & 0.95 & 3.30 & 0.65 & -14\% & -18\% & 0.37 \\
+kin8nm & -14\% & \textbf{2\%} & -19\% & 0.96 & 3.42 & 0.67 & -13\% & -16\% & 0.30 \\
+concrete\_compressive\_strength & -20\% & \textbf{4\%} & -35\% & 0.96 & 3.01 & 0.61 & -30\% & -43\% & 0.41 \\
+concrete\_compressive\_strength & -16\% & -8\% & -10\% & 0.92 & 3.08 & 0.62 & -72\% & -94\% & 0.47 \\
+concrete\_compressive\_strength & -18\% & -3\% & -24\% & 0.96 & 2.99 & 0.60 & -21\% & -33\% & 0.56 \\
+concrete\_compressive\_strength & -25\% & -4\% & -34\% & 0.94 & 2.86 & 0.58 & -26\% & -36\% & 0.41 \\
+concrete\_compressive\_strength & -22\% & \textbf{2\%} & -31\% & 0.96 & 3.05 & 0.62 & -35\% & -50\% & 0.53 \\
+cars & -24\% & -6\% & -27\% & 0.92 & 1.99 & 0.34 & -22\% & -23\% & 0.73 \\
+cars & -49\% & \textbf{4\%} & -103\% & 0.97 & 2.70 & 0.46 & -20\% & -17\% & 0.80 \\
+cars & -14\% & -5\% & -12\% & 0.93 & 2.02 & 0.34 & -59\% & -56\% & 0.60 \\
+cars & -36\% & -6\% & -54\% & 0.93 & 2.44 & 0.41 & -37\% & -37\% & 0.66 \\
+cars & -37\% & -6\% & -68\% & 0.89 & 2.12 & 0.36 & -50\% & -25\% & 0.34 \\
+energy\_efficiency & \textbf{2\%} & -3\% & \textbf{5\%} & 0.97 & 0.62 & 0.18 & -18\% & -32\% & 0.98 \\
+energy\_efficiency & -42\% & -6\% & -62\% & 0.94 & 0.85 & 0.25 & -159\% & -104\% & 0.90 \\
+energy\_efficiency & -4\% & -6\% & \textbf{2\%} & 0.93 & 0.69 & 0.20 & -8\% & -20\% & 0.95 \\
+energy\_efficiency & -29\% & -4\% & -41\% & 0.94 & 0.79 & 0.23 & -39\% & -82\% & 0.95 \\
+energy\_efficiency & -75\% & 0\% & -316\% & 1.00 & 2.61 & 0.76 & -122\% & -136\% & 0.92 \\
+california\_housing & -2\% & -2\% & 0\% & 0.96 & 2.88 & 0.69 & -11\% & -16\% & 0.60 \\
+california\_housing & -9\% & -2\% & -8\% & 0.96 & 2.90 & 0.69 & -19\% & -23\% & 0.64 \\
+california\_housing & -5\% & -2\% & -4\% & 0.97 & 3.02 & 0.72 & -11\% & -13\% & 0.64 \\
+california\_housing & -1\% & -3\% & \textbf{1\%} & 0.93 & 2.77 & 0.66 & -15\% & -18\% & 0.50 \\
+california\_housing & -10\% & -1\% & -10\% & 0.97 & 3.07 & 0.73 & -13\% & -17\% & 0.64 \\
+airfoil\_self\_noise & -33\% & -3\% & -46\% & 0.97 & 3.62 & 0.77 & -163\% & -218\% & 0.34 \\
+airfoil\_self\_noise & -36\% & -2\% & -56\% & 0.93 & 3.42 & 0.73 & -27\% & -36\% & 0.42 \\
+airfoil\_self\_noise & -31\% & -5\% & -40\% & 0.92 & 3.42 & 0.73 & -50\% & -83\% & 0.17 \\
+airfoil\_self\_noise & -32\% & -2\% & -45\% & 0.97 & 3.91 & 0.83 & -45\% & -57\% & 0.43 \\
+airfoil\_self\_noise & -22\% & -2\% & -30\% & 0.94 & 3.29 & 0.70 & -27\% & -51\% & 0.36 \\
+QSAR\_fish\_toxicity & \textbf{2\%} & \textbf{1\%} & 0\% & 0.98 & 4.12 & 0.64 & \textbf{4\%} & \textbf{2\%} & 0.51 \\
+QSAR\_fish\_toxicity & -10\% & -4\% & -7\% & 0.93 & 3.43 & 0.53 & -12\% & -12\% & 0.40 \\
+QSAR\_fish\_toxicity & -7\% & \textbf{1\%} & -11\% & 0.93 & 2.87 & 0.45 & -6\% & -8\% & 0.45 \\
+QSAR\_fish\_toxicity & -17\% & -7\% & -16\% & 0.86 & 2.99 & 0.47 & -23\% & -26\% & 0.25 \\
+QSAR\_fish\_toxicity & 0\% & -3\% & -1\% & 0.90 & 2.63 & 0.41 & -4\% & -6\% & 0.34 \\
+\bottomrule
+\end{tabular}
+}
+\end{sc}
+\end{small}
+\end{table*}

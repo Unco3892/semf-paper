@@ -1,0 +1,629 @@
+\documentclass{article}
+\PassOptionsToPackage{numbers, compress}{natbib}
+\usepackage{arxiv}
+% \bibliographystyle{abbrvnat}
+\bibliographystyle{unsrt}
+% \bibliographystyle{plain}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{arxiv}
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{arxiv}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+% modified this for the comments
+% \usepackage[{xcolor}         % colors
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+\usepackage{algorithm}
+\usepackage{algcompatible}
+
+% For the indicator function and math functions
+\usepackage{dsfont}
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% added manually for better in-line referencing
+\usepackage{cleveref}% Load AFTER hyperref!
+\usepackage{appendix}
+\newcommand{\algorithmautorefname}{Algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For theorems and such
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{mathtools}
+% \usepackage{amsthm}
+% \usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{textcomp}
+
+% \theoremstyle{plain}
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \theoremstyle{definition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{assumption}[theorem]{Assumption}
+% \theoremstyle{remark}
+% \newtheorem{remark}[theorem]{Remark}
+
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+%\usepackage[disable,textsize=tiny]{todonotes}
+\usepackage[textsize=tiny]{todonotes}
+\usepackage{shellesc}
+\ShellEscape{pdflatex -interaction=nonstopmode -output-directory assets assets/semf-tikz-plot.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package for tracking changes (to be removed at the end)
+% set "Eq." instead of "Equation" as well as upper case section and Subsections
+\renewcommand{\equationautorefname}{Eq.}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Subsection}
+\renewcommand{\subsubsectionautorefname}{Subsubsection}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+% Options for appendices
+% Appendices
+% begin appendix autoref patch [\autoref subsections in appendix](https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix)
+\def\appendixautorefname{Appendix}
+
+% begin appendix autoref patch [\autoref subsections in appendix](https://tex.stackexchange.com/questions/149807/autoref-subsections-in-appendix)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\hyper@makecurrent}{%
+    \ifx\Hy@param\Hy@chapterstring
+        \let\Hy@param\Hy@chapapp
+    \fi
+}{%
+    \iftoggle{inappendix}{%true-branch
+        % list the names of all sectioning counters here
+        \@checkappendixparam{chapter}%
+        \@checkappendixparam{section}%
+        \@checkappendixparam{subsection}%
+        \@checkappendixparam{subsubsection}%
+        \@checkappendixparam{paragraph}%
+        \@checkappendixparam{subparagraph}%
+    }{}%
+}{}{\errmessage{failed to patch}}
+
+\newcommand*{\@checkappendixparam}[1]{%
+    \def\@checkappendixparamtmp{#1}%
+    \ifx\Hy@param\@checkappendixparamtmp
+        \let\Hy@param\Hy@appendixstring
+    \fi
+}
+\makeatletter
+
+\newtoggle{inappendix}
+\togglefalse{inappendix}
+
+\apptocmd{\appendix}{\toggletrue{inappendix}}{}{\errmessage{failed to patch}}
+\apptocmd{\subappendices}{\toggletrue{inappendix}}{}{\errmessage{failed to patch}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals}
+
+\author{%
+  Ilia Azizi\thanks{Corresponding author.} \\
+  HEC, University of Lausanne\\
+  Lausanne, Switzerland \\
+  \texttt{ilia.azizi@unil.ch} \\
+  \And
+  Marc-Olivier Boldi \\
+  HEC, University of Lausanne\\
+  Lausanne, Switzerland \\
+  \texttt{marc-olivier.boldi@unil.ch} \\
+  \And
+  Valérie Chavez-Demoulin \\
+  HEC, University of Lausanne\\
+  Expertise Center for Climate Extremes (ECCE) \\
+  Lausanne, Switzerland \\
+  \texttt{valerie.chavez@unil.ch} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\setcounter{footnote}{0} % Reset footnote counter
+This work introduces the Supervised Expectation-Maximization Framework (SEMF), a versatile and model-agnostic approach for generating prediction intervals in datasets with complete or missing data. SEMF extends the Expectation-Maximization algorithm, traditionally used in unsupervised learning, to a supervised context, leveraging latent variable modeling for uncertainty estimation. Extensive empirical evaluations across 11 tabular datasets show that SEMF often achieves narrower normalized prediction intervals and higher coverage rates than traditional quantile regression methods\footnote{Code: \url{https://github.com/Unco3892/semf-paper}}. Furthermore, SEMF can be integrated with machine learning models like gradient-boosted trees and neural networks, highlighting its practical applicability. The results indicate that SEMF enhances uncertainty quantification, particularly in scenarios with complete data.
+\end{abstract}
+
+\section{Introduction}
+In the evolving field of machine learning (ML), the quest for models able to predict outcomes while quantifying the uncertainty of their predictions is critical. The ability to estimate prediction uncertainty is particularly vital in high-stakes domains such as healthcare \cite{dusenberry2020uncertainehr}, finance \cite{wisniewski2020confirmalfinance}, and autonomous systems \cite{tang2022prediction}, where prediction-based decisions have important consequences. Traditional approaches have primarily focused on point estimates, with little to no insight into prediction reliability. This limitation underscores the need for frameworks that can generate both precise point predictions and robust prediction intervals. Such intervals provide a range within which the true outcome is expected to lie with a fixed probability, offering a finer understanding of prediction uncertainty. This need has spurred research into methodologies that extend beyond point estimation to include uncertainty quantification, thereby enabling more informed decision-making in applications reliant on predictive modeling \cite{ghahramani2015probabilistic}.
+
+In this paper, we introduce the Supervised Expectation-Maximization Framework (SEMF) based on the Expectation-Maximization (EM) algorithm \cite{Dempster1977}. Traditionally recognized as a clustering technique, EM is used for supervised learning in SEMF, allowing for both point estimates and prediction intervals using any ML model (model-agnostic). SEMF generates representations for latent or missing modalities, which can be relevant for incomplete data and holds potential for multi-modal data applications, though multi-modal settings are left for future exploration. This paper details the methodology behind the framework and proposes a training algorithm based on Monte Carlo (MC) sampling, also used in variational inference for Variational Auto-Encoders (VAEs) \cite{Blei2017, kingma2014vae}. SEMF differs from prominent supervised EM approaches such as \cite{ghahramani1993em}, which focus on point prediction using Gaussian Mixture Models (GMMs). Additionally, our method operates in a frequentist paradigm, directly maximizing the likelihood function through iterative EM steps without integrating over posterior distributions. Although SEMF can be extended to a Bayesian framework as its likelihood component, this extension lies beyond the scope of this paper.
+% Comparisons with other models across several datasets showcase its contribution to the existing uncertainty quantification and predictive modeling literature \cite{gawlikowski2023survey}.
+
+The remainder of this paper is organized as follows: \autoref{method} details the theory and the methodology of SEMF. \autoref{related_work} reviews related works in latent representation learning, uncertainty estimation, and handling of missing data. \autoref{experimental_setup} describes the experimental setup, including datasets and evaluation metrics. \autoref{results} discusses the results, demonstrating the efficacy of SEMF. Lastly, \autoref{conclusion} concludes the paper, and \autoref{future_work} outlines the limitations and potential research directions.
+
+% Method section
+\section{Method}
+\label{method}
+This section presents the founding principles of SEMF from its parameters, training, and inference procedure with, at its core, the EM algorithm. This algorithm, first introduced by \cite{Dempster1977}, is an unsupervised method for handling latent variables and incomplete data. Invented to maximize the model likelihood, it builds a sequence of parameters that guarantee an increase in the log-likelihood \cite{wu1983convergence} by iterating between the Expectation (E) and the Maximization (M) steps. In the E-step, one computes
+
+\begin{equation}
+\label{eqn:em_e_step}
+Q(p | p') = \mathbb{E}_{Z \sim p'(z| x)}\left[ \log p(x, Z) \right] = \int \log p(x,z) p'(z|x) dz,
+\end{equation}
+where \( p' \) stands for the current estimates, \( \log p(x, z) \) is the log-likelihood of the complete observation $(x,z)$, and \( z \) is a latent variable. The M-step maximizes this $Q$-function: $p' \leftarrow \arg\max_p Q(p | p')$ . The sequence is repeated until convergence.
+
+\subsection{Problem Scenario}
+Let $x=(x_1, x_2, \ldots, x_K)$ denote $K$ inputs and the output be $y$. For simplicity, we limit $y$ to be numerical, although it could be categorical without loss of generality. Component $x_k$ is a source: a modality, a single or group of variables, or an unstructured input such as an image or text. For clarity, we limit to $K=2$, where $x_1$ and $x_2$ are single variables. We assume that only $x_1$ may contain missing values, either at random or partially at random.
+
+Let $p(y|x)$ be the density function of the outcome given the inputs (the fact that $y$ is continuous can be easily relaxed). A founding assumption, in the spirit of VAE, is that $p(y|x)$ decomposes into  $p(y|x)=\int p(y|z) p(z_1|x_1) p(z_2|x_2)dz_1dz_2$, where $z=(z_1,z_2)$ are unobserved latent variables. We assume that $p(y|z,x)=p(y|z)$, that is, $z$ contains all the information of $x$ about $y$, and that $p(z|x)=p(z_1|x_1)p(z_2|x_2)$, that is, there is one latent variable per source. These are independent conditionally on their corresponding source. Finally, if $x_1$ is missing, then $p(y|x_2) = \int p(y|z) p(z_1|x_1) p(x_1|x_2) p(z_2|x_2)dx_1dz_1dz_2$.  
+The contribution to the log-likelihood of a complete observation $(y, z, x)$ is
+$\log p(y , z| x) = \log p(y | z) + \log p(z| x)$. In the E-step, we compute
+\begin{eqnarray}
+\label{eqn:E_gen}
+\int \log p(y , z| x) p'(z | y, x) dz &=& \int \log p(y | z) p'(z|y, x) dz + \int \log p(z| x) p'(z|y, x) dz.
+\end{eqnarray}
+where $p'$ is our current estimate. \autoref{eqn:E_gen} can be estimated by MC sampling. Since sampling from $p'(z|y, x)$ can be inefficient, we rather rely on the decomposition $p'(z|y, x) = p'(y|z) p'(z|x)/p'(y|x)$. Thus, we sample $z_r$ from $p'(z|x)$, $r=1,\ldots,R$, and, setting $w_r=p'(y|z_r)/\sum_{t} p'(y|z_{t})$, approximate the right-hand side term of \autoref{eqn:E_gen}
+\begin{eqnarray}
+\label{eqn:E_MC_gen}
+\int \log p(y , z| x) p'(z|y, x) dz &\approx& \sum_{r=1}^R \left\{\log p(y | z_r) + \log p(z_r| x)\right\} w_r.
+\end{eqnarray}
+If $x_1$ is missing, a similar development leads to
+\begin{eqnarray}
+\label{eqn:E_MC_gen_mis}
+\int \log p(y , z, x_1| x_2) p'(z, x_1 | y) dz &\approx& \sum_{r=1}^R \left\{\log p(y | z_r) + \log p(z_r| x) + \log p(x_{1,r}|x_2)\right\} w_r,\quad
+\end{eqnarray}
+where $x_{1,r}$ and $z_r$ are respectively sampled from $p'(x_1|x_2)$ and $p'(z | x_{1,r}, x_2)$.  
+
+\subsection{Objective Function}
+\label{objective_function}
+Adapting \autoref{eqn:E_MC_gen} and \autoref{eqn:E_MC_gen_mis} for the observed data $\{(y_i,x_i)\}_{i=1}^N$, the overall loss function, $\mathcal{L}$, is
+\begin{equation}
+\label{eqn:overall_loss}
+\mathcal{L}(\phi, \theta, \xi) = -\sum_{i=1}^N \sum_{r=1}^R\left\{\log p_{\phi}(z_{i,r} | x_{i,r}) + \log p_\theta(y_i | z_{i,r}) + \mathds{1}_{\{i \in I_m\}} \log p_\xi(x_{1,i,r} | x_{2,i})\right\} w_{i,r},
+\end{equation}
+where $I_m$ is the set of those $i$'s such that $x_{1,i}$ is missing. The models of $p(y|z)$, $p(z|x)$, and $p(x_1|x_2)$ inherit parameters \(\theta\), \( \phi\), and $\xi$, respectively. Also, $x_{1,i,r}$ is sampled from $p_{\xi'}(x_1|x_{2,i})$, if $x_{1,i}$ is missing, and $z_{1,i,r}$ and $z_{2,i,r}$ are sampled from $p_{\phi'}(z_1|x_{1,i,r})$ and $p_{\phi'}(z_2|x_{2,i})$. Furthermore, for compactness of notation, $x_{i,r}$ is $(x_{1,i},x_{2,i})$ if $x_{1,i}$ is observed, and $(x_{1,i,r},x_{2,i})$ if $x_{1,i,r}$ is missing. Finally, the weights are 
+\begin{equation}
+\label{eqn:compute_w}
+w_{i,r} = \frac{p_{\theta'}(y_i | z_{i,r})}{\sum_{t=1}^R p_{\theta'}(y_i | z_{i,t})}.
+\end{equation}
+
+\autoref{eqn:overall_loss} shows that ${\cal L}$ is a sum of losses associated with the encoder model, $p_\phi$, for each source, the decoder model, $p_\theta$, from the latent variables to the output, and, if applicable, the model handling missing data, $p_\xi$. At each M-step, ${\cal L}$ is minimized with respect to $\theta$, $\phi$, and $\xi$. Then, $\theta'$, $\phi'$, and $\xi'$ are updated, as well as the weights and the sampling. Then the process is iterated until convergence.
+
+\subsubsection{Example: \texorpdfstring{$\mathcal{L}(\phi, \theta, \xi)$}{} under normality}
+Similar to \cite{kingma2014vae}, we develop further ${\cal L}$ under normality assumptions for the encoder, $p_\phi$, and the decoder, $p_\theta$. These simple cases are illustrative, though any other distributions could be adopted, including non-continuous or non-numerical outcomes. 
+
+\paragraph{Encoder $p_{\phi}(z|x)$.} Let $m_k$ be the length of the latent variable $z_k$, $k=1,2$. We assume a normal model for $Z_k$ given $X_k=x_k$,
+\begin{equation}
+\label{eqn:compute_z}
+Z_k | X_k=x_k \sim {\cal N}_{m_k}(g_{\phi_k}(x_k), \sigma_{k}^2 J_{m_k}),
+\end{equation} 
+where $J_{m_k}$ is the $m_k\times m_k$ identity matrix. In particular,
+\begin{eqnarray}
+\log p_\phi(z_k|x_k) &=& -\frac{m_k}{2}\log 2\pi - \frac{1}{2}\log \sigma_k^2 - \frac{1}{2\sigma_k^2} \sum_{j=1}^{m_k} \{z_{k,j} - g_{\phi_k,j}(x_k)\}^2, \quad k=1,2.
+\end{eqnarray}
+The mean $g_{\phi_k}(x_k)$ can be any model, such as a neural network, with output of length $m_k$, $k=1,2$. The scale $\sigma_{k}$ can be fixed, computed via the weighted residuals, or learned through a separate set of models. It controls the amount of noise introduced in the latent dimension and is pivotal in determining the prediction interval width for $p(y|z)$. In this paper, $\sigma_{k}$ is fixed for simplicity. 
+
+% $I_{m_k}$ from Equation \eqref{eqn:compute_z} can be set to any value and does not have to be identity. We expect the SEMF algorithm to learn the distribution of $Z$ regardless of the scale, but this value can also be set manually. 
+
+% \subsubsection{Model \(f_\theta(z)\) for \( Y \) given \( z \)}
+\paragraph{Decoder $p_{\theta}(y|z)$.}
+We assume a normal model for $Y$ given $Z=z$,
+\begin{equation}
+\label{eqn:y_given_z}
+    Y | Z=z \sim \mathcal{N}(f_\theta(z), \sigma^2).
+\end{equation}
+This results in a log-likelihood contribution,
+\begin{equation}
+\label{eqn:p_theta_llk}
+    \log p_{\theta}(y|z) = -\frac{1}{2}\log 2\pi - \frac{1}{2}\log \sigma^2 - \frac{1}{2\sigma^2} \{y-f_\theta(z)\}^2.
+\end{equation}
+Again, the mean $f_\theta(z)$ can be any model, such as a neural network. 
+%where $\theta$ contains $\zeta$, the parameters of the mean of $y$ given $Z=z$, $f_\zeta(z)$, and $\sigma^2$, its variance:
+%\begin{equation}
+%\label{eqn:p_zeta_theta}
+%    \theta = [\zeta, \sigma^2]
+%\end{equation}
+
+\paragraph{Model for missing data $p_{\xi}(x_1|x_2)$.}
+% \subsubsection{Model $p_\xi(x_1 | x_2)$ for simulating missing $X_1$ given $X_2=x_2$}
+We use an empirical model for $X_1$ given $X_2=x_2$ where $p_{\xi}(x_1|x_2)$ put masses only on those non-missing $x_1$'s in the training set. Let $I_{nm}$ be the set of indices such that $x_{1,j}$, $j\in I_{nm}$, are all the non-missing $x_1$ in the training set. Additionally, for a given $j\in I_{nm}$, $x_1[j]$ is the observed $x_1$ corresponding to $j$. For a given $x_2$, $p_\xi(x_2)$ is a vector of length $|I_{nm}|$, the cardinality of $I_{nm}$, with components
+\begin{equation}
+\label{eqn:p_xi_sigmoid}
+    p_\xi(j | x_2) = \frac{\exp\{h_{\xi,j}(x_2)\}}{\sum_{t\in I_{nm}}\exp\{h_{\xi,t}(x_2)\}}, \quad j\in I_{nm},
+\end{equation}
+where $h_\xi$ is a vector of length $|I_{nm}|$, typically a neural network with input $x_2$ and output on $I_{nm}$. Now, the probability of $X_1=x_1$ given $X_2=x_2$ is
+\begin{equation}
+\label{eqn:p_xi_infer}
+    p_\xi(x_1 | x_2) = \sum_{j \in I_{nm}} p_\xi(j | x_2) \cdot \mathds{1}\{x_1 = x_1^{(nm)}[j]\}.
+\end{equation}
+
+\paragraph{Summary.}
+Overall, the M-step is
+\begin{equation}
+\phi_k^* = \arg\min_{\phi_k} \sum_{i,r} w_{i,r} \sum_{j=1}^{m_k} \{z_{k,i,r,j} - g_{\phi_k,j}(x_{k,i,r})\}^2,\quad k=1,2,
+ \end{equation}
+\begin{equation}
+\theta^* = \arg\min_\theta \sum_{i,r} w_{i,r}\{y_i - f_{\theta}(z_{i,r})\}^2,
+\end{equation}
+\begin{equation}
+\label{eq_sigma}
+(\sigma^{*})^2 = \frac{1}{N} \sum_{i,r} w_{i,r}\{y_i - f_{\theta^*}(z_{i,r})\}^2,
+\end{equation}
+\begin{equation}
+\label{eq_xi}
+\xi^* = \arg\max_{\xi} \sum_{t\in D_x} w_{t} \log p_\xi(j_t | x_{2,t}).
+\end{equation}
+
+When \( x_{1,i} \) is missing, the sampling is enriched by simulated $x_{1,i,r}$. \autoref{eq_xi} selects \( j^* \) from \( I_{nm} \) based on \( p_{\xi'}(j | x_2) \) according to \autoref{eqn:p_xi_infer} and \autoref{eqn:p_xi_sigmoid}. The $D_x$ above is a subset of the data for $\xi$, learned on the missing data part. We also note that learning the parameters above is parallelizable.
+
+\subsection{Training}
+\label{semf_training}
+For efficiency purpose, the training set, $\{1, \ldots, N\}$, is segmented into batches \( \{b_1, \ldots, b_L\} \) on which the index $i$ runs (and thus the denominator of \autoref{eq_sigma} must be adapted accordingly). The process iterates for each batch until the maximum number of steps is reached or an early stopping criterion is satisfied. The full details are given in \autoref{algo:semf-train} (\autoref{appendix:semf-algo}). The framework requires tuning hyper-parameters such as the number of MC samples $R$, the number of latent nodes $m_k$, and the standard deviation $\sigma_{k}$ of $Z_k$. Monitoring the point prediction on a hold-out validation is important to combat overfitting and terminate the training early with a \textsc{patience} hyper-parameter. Moreover, due to the generative nature of SEMF, the variation resulting from the initial random seed is measured in \autoref{experiment_models}. Additionally. the model-specific hyper-parameters ($p_\phi$, $p_\theta$ and $p_\xi$) are also discussed in the same Subsection.
+
+\subsection{Inference}
+The encoder-decoder structure of SEMF entails the simulations of $z_{r}$ during inference, as depicted in \autoref{fig:semf-overview}. In theory, any inference can be performed for $\hat{y}$, for instance the mean value $\hat{y} = \frac{1}{R} \sum_{r=1}^R f_\theta(z_r)$, where $z_r \sim p_\phi(z|x)$ (see \autoref{algo:semf-infer} in \autoref{appendix:semf-algo}). For prediction intervals, a double simulation scheme is used,
+\begin{equation}
+  z_r \sim p(z|x), \quad \hat{y}_{r,s} \sim p_{\theta}(y | z_r),\quad r,s=1,\ldots,R.
+\end{equation}
+Prediction interval at a given level of certainty $\alpha$ follows as
+\begin{equation}
+\label{semf_quantile}
+PI = \text{quantile}\left(\{\hat{y}_{r,s}\}; \frac{\alpha}2, 1-\frac{\alpha}2\right).
+\end{equation}
+
+\paragraph{Remark.} We denote the $R$ for inference as $R_\mathrm{infer}$.
+
+\begin{figure}[ht]
+% \vskip 0.2in
+\begin{center}
+\includegraphics[width=0.8\columnwidth]{assets/semf-tikz-plot.pdf}
+% \centerline{\input{assets/semf-tikz-plot.tex}}
+\caption{Inference procedure with the SEMF's learnable parameters $\phi_k , \theta$ and $\xi$. Here, we illustrate the number of inputs $k$ as $k=1,2$, assuming that $x_1$ may contain missing values}
+\label{fig:semf-overview}
+\end{center}
+% \vskip -0.2in
+\end{figure}
+
+\section{Related Work}
+\label{related_work}
+\subsection{Latent Representation Learning}
+Latent representation learning involves modeling hidden variables from observed data for various ML tasks, most notably Auto-Encoders (AEs) and VAEs. AEs are neural networks that reconstruct inputs by learning an intermediate latent representation. The encoder $g_{\phi}(\cdot)$ in an AE embeds the input $x$ into a latent variable $z$, which then passes through the decoder $f_{\theta}(\cdot)$, reconstructing $x$ as $\hat{x}=f_{\theta}(z)$. The training process optimizes the parameters $\phi$ and $\theta$ by minimizing the reconstruction loss. Unlike AEs, which focus on reconstruction, VAEs use variational methods to fit distributions of latent variables and the output \cite{kingma2014vae}. Given a sample $x$ with a latent variable $z$, VAEs model the marginal likelihood $p_\theta(x)$. However, directly maximizing this likelihood is difficult \cite{blei2017vireview}. %beal2003variational
+Thus, alternative methods exist, such as maximizing the evidence lower bound (ELBO), which provides guarantees on the log-likelihood \cite{balakrishnan2017emguarantees}.
+
+For supervised and semi-supervised tasks, latent representation learning can include task-specific predictions \cite{kingma2014semi}. More specifically, models such as AEs follow the classical encoder-decoder objective while training a predictor $h_{\psi}(z)$ through an additional layer or model to estimate the output $y$. This dual objective helps in learning more task-relevant embeddings \cite{zhuang2015supervisedautoencoder, le2018supervisedae}. Semi-supervised VAEs are similar, with the distinction that they couple the reconstruction loss of the unlabeled data with a variational approximation of latent variables. This is effective even with sparse labels \cite{ji2020Multisupervisedvae, zhuang2023semi}. 
+
+The EM algorithm has already been used for supervised learning tasks using specific models \cite{ghahramani1993em, williams2005, louiset2021ucsl}, where the goal has been point prediction with GMMs. Similarly, the EM algorithm adapts well to minimal supervision \cite{luo2020weakly} and using labeled and unlabeled data in semi-supervised settings for both single and multiple modalities \cite{he2022semisupem, xu2024expectation}. Our work differs by modifying using MC sampling to generate prediction intervals with any ML model and, in theory, under any distribution.
+
+\subsection{Prediction Intervals}
+
+Crucial for estimating uncertainty, prediction intervals in regression are often derived using methods such as Bayesian approaches \cite{williams1995gaussian,hensman2015scalable,gal2016dropoutbnn}, ensemble techniques \cite{breiman2001random,lakshminarayanan2017simple, malinin2021uncertainty}, or quantile regression \cite{Koenker1978, koenker2001qr}. Additionally, these methods can be complemented with conformal prediction, a framework for calibrating any point predictor to produce prediction intervals \cite{vovk2005algorithmic, vovk2022conformal}, making it highly relevant for enhancing reliability in applications requiring rigorous uncertainty quantification.
+
+A key component of quantile regression is the pinball loss function, which effectively balances the residuals to capture the desired quantiles even for non-parametric models \cite{steinwart2011estimating}, making it ideal for asymmetric distributions where tail behavior is of critical importance \cite{koenker2001qr}. This loss function is pivotal not only for single model scenarios but also enhances ensemble methods by refining their quantile estimate \cite{meinshausen2006quantile}. Conformal prediction further extends the applicability of these intervals by providing a layer of calibration that adjusts intervals obtained from any predictive model, ensuring they cover the true value with a pre-specified probability \cite{romano2019cqr}. 
+
+\subsection{Missing Data}
+Managing missing values is a pivotal aspect when dealing with real-world data. Naive methods such as discarding instances or mean/median-imputation may be infeasible or carry the risk of changing the data distribution \cite{yoon2020vime, jadhav2019comparison}. The chosen technique for handling missing data should adhere to the dataset's characteristics and mechanisms behind the missing data \cite{ibrahim2008model}. More advanced approaches, like the Iterative Imputer from scikit-learn \cite{scikit-learn}, an implementation of Multiple Imputation by Chained Equations (MICE) \cite{Buuren2011}, expand on the simple imputations by iteratively modeling each feature with missing values as a function of other features \cite{Buck1960, schafer1997analysis}. Due to its complexity, MICE is best compared with alternatives such as K-means clustering and artificial neural networks (ANNs). K-means assigns missing values based on cluster centroids \cite{Wang2019} as opposed to ANNs, which learn complex, non-linear relationships between variables \cite{pereira2020}. ANNs effectively predict or reconstruct missing values and thus are particularly useful in datasets where relationships between variables are intricate and not easily captured by straightforward imputation methods. Accordingly, ANNs have demonstrated superior performance over MICE and GMM (with EM for missing values) in scenarios where a large proportion of the data is missing \cite{smieja2018processing}.
+
+\section{Experimental Setup}
+\label{experimental_setup}
+\subsection{Datasets}
+We systematically curate a subset of datasets from the OpenML-CTR23 \cite{fischer2023}  benchmark suite to evaluate and carry out our experiments. Initially comprising 35 datasets, we apply an exclusion criteria to refine this collection to 11 datasets. The details and overview are in \autoref{appendix:semf-databench}. We remove duplicated rows from all the datasets and carry out the standardization (scaling) of all predictors, including the outcome, which we transformed to have zero means and unit variances. The features of these datasets are then treated as separate inputs to SEMF. In the second stage of our experiments, we artificially introduce 50\% missing values in our datasets for any predictor except for the first feature of a randomly chosen row, which emulates missing completely at random (MCAR) data. In all our datasets, 70\% of the data is used to train all models, 15\% as a hold-out validation set to monitor SEMF's performance, and 15\% to evaluate the models. To combat overfitting, baseline models that benefit from early stopping are allocated another 15\% from the training data. Lastly, it is essential to note that all data in SEMF are processed batch-wise, without employing mini-batch training, to ensure consistency and stability in the training process.
+
+\subsection{Models}
+\label{experiment_models}
+Our baseline consists of both point and quantile regression eXtreme Gradient Boosting (XGBoost) \cite{Chen2016}, Extremely Randomized Trees (ET) \cite{geurts2006extremely}, and neural networks \cite{tagasovska2019single}, all summarized and depicted in \autoref{tab:model_comparisons}. To ensure consistency in our experimental setup, we align the families and hyper-parameters of $p_{\phi}$ and $p_{\theta}$ with our baseline models. For example, in the case of XGBoost in SEMF, we use $K$ XGBoosts, $g_{\phi_k}(x_k)$, one for each input $x_k$, $k=1,\ldots, K$, and one XGBoost for $f_\theta(z)$ with the same hyper-parameters. We refer to the SEMF's adoption of these models as MultiXGBs, MultiETs, and MultiMLPs. When establishing prediction intervals, we conformalize our prediction intervals according to \cite{romano2019cqr} at an uncertainty tolerance of 5\% for both the baseline and SEMF (\autoref{semf_quantile}). The missing data simulator, $p_\xi$, is constructed using a shallow neural network, which employs the $\mathrm{SELU}$ activation function \cite{klambauer2017self}. It is experimented with two distinct node counts: 50 and 100. 
+
+To constrain the breadth of our parameter exploration, the simulator for the missing model adopts the optimal set of hyper-parameters identified from analyses involving complete datasets. We target (larger) $\sigma_k$ values that introduce more noise and produce better intervals than point predictions. The optimal models are then trained and tested with five different seeds, and the results are averaged. The point prediction, $\hat{y}$, uses the mean inferred values. We then study the performance of SEMF against mean and median imputation techniques, five nearest neighbors, and MICE from \cite{scikit-learn}. The imputers are used within the point and interval baseline models explained in the following subsection to form the missing value baseline. \autoref{appendix:optimal-semf} contains more details on the hyper-parameters for each SEMF model and dataset.
+
+\begin{table}[!htbp]
+\centering
+\caption{SEMF models, baselines, and hyper-parameters.}
+\vskip 0.15in
+\label{tab:model_comparisons}
+\resizebox{\textwidth}{!}
+{\begin{tabular}{p{1.5cm} p{6cm} p{6cm}}
+\toprule
+\textbf{SEMF} & \multicolumn{1}{c}{\textbf{Point Prediction Baseline}} & \multicolumn{1}{c}{\textbf{Interval Prediction Baseline}} \\
+\midrule
+MultiXGBs & XGBoost \cite{chen2016xgboost} \newline \small{Trees: 100, Maximum depth: 6, Early stopping steps: 10} & Quantile XGBoost \newline \small{Same as point prediction baseline, XGBoost} \\
+\cmidrule(lr){1-3}
+MultiETs & Extremely Randomized Trees \cite{scikit-learn} \newline \small{Trees: 100, Maximum depth: 10} & Quantile Extremely Randomized Trees \cite{johnson2024et} \newline \small{Same as point prediction baseline, Extremely Randomized Trees} \\
+\cmidrule(lr){1-3}
+MultiMLPs & Deep Neural Network \newline \small{Hidden layers: 2, Nodes per layer: 100, Activation functions: ReLU, Epochs: 1000 or 5000, Learning rate: 0.001, Batch training, Early stopping steps: 100} & Simultaneous Quantile Regression \cite{tagasovska2019single} \newline \small{Same as point prediction baseline, Deep Neural Network} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\subsection{Metrics}
+The evaluation of point predictions employs Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and R-squared ($\text{R}^2$). For prediction intervals, the chosen metrics, following \cite{pearce2018high} and \cite{zhou2023real}, are the Prediction Interval Coverage Probability (PICP), and Normalized Mean Prediction Interval Width (NMPIW) as described in \autoref{appendix:common-metrics}. This paper also evaluates SEMF on our new metric, termed Coverage-Width Ratio (CWR), 
+
+\begin{equation}
+    \text{CWR}=\frac{\text{PICP}}{\text{NMPIW}},
+\end{equation}
+
+which evaluates the coverage probability ratio to the prediction interval's width. CWR provides a refined understanding of the balance between an interval's accuracy (coverage) and precision (width). Though a larger value of this metric is better in higher confidence levels, the marginal increase in NMPIW is likely higher than that of PICP, resulting in decreasing CWR.
+
+In our case, measuring the performance of SEMF over the baseline models is far more critical than reviewing absolute metrics in isolation. For any metric above, except for ($\text{R}^2$), this is computed as 
+\small
+\begin{equation}
+\label{eqn:base_metric}
+\text{Metric}_\Delta(\%) = \left( \frac{\text{Metric}_{\text{SEMF}} - \text{Metric}_{\text{Baseline}}}{\text{Metric}_{\text{Baseline}}} \right) \times 100 ,
+\end{equation}
+\normalsize
+on which we base our decisions for selecting the best hyper-parameters as explained in \autoref{appendix:relative-metrics-impact}.
+
+\section{Results}
+\label{results}
+We trained and tested 330 models corresponding to the three model types—MultiXGBs, MultiETs, and MultiMLPs—across 11 datasets with both complete and 50\% missing data, using five seeds for each combination. \autoref{table-combined-complete-aggregated} and \autoref{table-combined-missing-aggregated} present the mean and standard deviation for our metrics aggregated over the five seeds. \autoref{appendix:full-results} includes the results from each individual run. For comparison, we also present the non-conformalized prediction intervals in \autoref{appendix:non-conformal-aggregated}, though we solely discuss the results for conformalized intervals on both complete and incomplete data.
+
+\subsection{Complete Data}
+The results of models with complete data are in \autoref{table-combined-complete-aggregated}. Overall, MultiXGBs and MultiMLPs performed generally well in producing intervals compared to their baselines, as shown by positive $\Delta$CWR and $\Delta$NMPIW while achieving similar $\Delta$PICP to the baselines. Notably, all models attained suitable intervals on \textit{naval\_propulsion\_plant} and \textit{energy\_efficiency}. Interestingly, MultiMLPs also attained good relative performance improvements for point prediction, which can indicate that the chosen $\sigma_{k}$ was too low for generating performant prediction intervals. MultiETs attained mixed results, with significant improvements in $\Delta$CWR for other datasets such as \textit{naval\_propulsion\_plant}, but its overall performance remains less conclusive.
+\input{assets/tex_tbls/table-combined-complete-aggregated}
+
+\subsection{Missing Data}
+The results of models with 50\% missing data are in \autoref{table-combined-missing-aggregated}. Note that relative metrics for SEMF are compared with the best result from any baseline imputer on that metric, regardless of how the imputer performed on the other metrics. Overall, the results are worse and less consistent than with complete data. MultiXGBs maintained good performance on some datasets, such as \textit{naval\_propulsion\_plant} and \textit{energy\_efficiency}, but declined on others, like \textit{cpu\_activity}. MultiETs continued to exhibit mixed results, with only \textit{naval\_propulsion\_plant} offering marginally better performance over the baseline. Similarly, MultiMLPs worked well on only one dataset, namely \textit{concrete\_compressive\_strength}, while the other datasets had increased model uncertainty.
+\input{assets/tex_tbls/table-combined-missing-aggregated}
+
+\subsection{Discussion}
+% Our results indicate that SEMF, when combined with XGBoost and MLPs, performs strongly on datasets with complete data. Both models produce better prediction intervals than traditional quantile regression methods in the complete case. MultiMLPs also deliver good point predictions for some datasets despite the experimental design prioritizing interval estimation over point accuracy. This could indicate either the effectiveness of the chosen $\sigma_{k}$, which (indirectly) led to narrower prediction intervals or underfitting of the MLPs. The truth may lie somewhere in between; SEMF's sampling operation, akin to cross-validation, partially helps combat overfitting, ensuring robust results despite variations in the data. In our preliminary experiments, we observed that increasing the depth of the baseline MLPs did not help and eventually led to overfitting. Extremely Randomized Trees (ETs) exhibit more mixed performance, highly dependent on the dataset's characteristics. The larger variations in predictive power compared to other models may be due to ETs' reliance on randomized splits, introducing significant variability in the prediction process. Consequently, ETs may not benefit from the iterative sampling and refinement of predictions inherent in SEMF.
+
+Our results indicate that SEMF, when combined with XGBoost and MLPs, performs strongly on datasets with complete data. Both models produce better prediction intervals than traditional quantile regression methods in the complete case. MultiMLPs also deliver good point predictions for some datasets despite the experimental design prioritizing interval estimation over point accuracy. This could indicate either the effectiveness of the chosen $\sigma_{k}$, which (indirectly) led to narrower prediction intervals or underfitting of the MLPs. The truth may lie somewhere in between; SEMF's sampling operation, akin to cross-validation, partially helps combat overfitting, ensuring robust results despite variations in the data. In our preliminary experiments, we observed that increasing the depth of the baseline MLPs did not help and eventually led to overfitting. ETs exhibit more mixed performance, highly dependent on the dataset's characteristics. One possible explanation behind the larger variations in predictive power compared to other models may be ETs' reliance on randomized splits, which introduces significant variability in the prediction process. Consequently, ETs may not benefit from the iterative sampling and refinement of predictions inherent in SEMF.
+
+The robustness of SEMF diminishes when applied to datasets with missing data. Despite not offering improvements over the baseline in the presence of missing data, we have presented these results to transparently illustrate our framework's current capabilities of handling missing inputs. From a theoretical standpoint, we believe there is value in further investigating how a single loss function that leverages EM's missing data capabilities can be effectively applied. Given that SEMF performs well with complete data, a practical alternative might involve using the best imputation method for the data at hand before applying SEMF, effectively treating the data as complete. We expect our ablation study to perform well, given the complete data results.
+
+An important observation is the stability of SEMF across different random seeds, as indicated by consistent PICP and NMPIW metrics (full results in \autoref{appendix:full-results}), contrasting the significant variability observed in the baseline models. This suggests that SEMF offers a more reliable performance framework. Additionally, it is worth noting that our experiments did not precisely tune for conformalized prediction intervals but used the non-conformalized (raw) quantiles from SEMF. The non-conformalized intervals offer less coverage but produce better CWR and NMPIW than the baseline (\autoref{appendix:non-conformal-aggregated}). Certain experimental choices—such as processing the columns separately, using the same hyperparameters for both complete and incomplete data, and fixing the number of latent nodes per input ($m_k$)—may have further constrained the models' ability to tailor their performance to the varying complexities of different datasets.
+
+\section{Conclusion}
+\label{conclusion}
+This paper introduces the Supervised Expectation-Maximization Framework (SEMF), a novel model-agnostic approach for generating prediction intervals in datasets with missing values. SEMF draws from the EM algorithm for supervised learning to devise latent representations that produce better prediction intervals than quantile regression. Due to SEMF's iterative simulation technique, training and inference can be done with complete and incomplete data. A comprehensive set of 330 experimental runs on 11 datasets with three different model types showed that SEMF, in the case of complete data, outperforms quantile regression, particularly on complete datasets and when using XGBoost, which intrinsically lacks latent representations. The results of the missing data are less positive and require further investigation. This research underscores SEMF's potential in various application domains and opens new avenues for further exploration of supervised latent representation learning and uncertainty estimation.
+
+\section{Limitations \& Future Work}
+The primary limitation of this study was its reliance on the normality assumption, which may not fully capture the potential of SEMF across diverse data distributions. Although in \autoref{appendix:example-non-normality} we demonstrate that the framework can learn non-normal patterns, further investigation and exploration of SEMF under other distributions, such as uniform, log-normal, and generalized extreme value distributions, are needed. The computational complexity of the approach presents another significant challenge, as the current implementation can be optimized for large-scale applications. Additionally, while the CWR metric is useful, it implicitly assumes that a 1\% drop in PICP equates to a 1\% reduction in NMPIW, thus assuming a uniform distribution. Evaluating CWR under various distributional assumptions would provide a more comprehensive assessment of its implications. Additionally, SEMF has only been evaluated on MCAR data and does not address missing at random cases (MAR), which require further investigation for real-world applicability. Finally, applying the same hyper-parameters across all datasets without specific tuning for incomplete data likely contributes to the observed decline in accuracy and robustness.
+
+\label{future_work}
+Future work presents several intriguing avenues for exploration. A promising direction is the application of SEMF in multi-modal data settings, where the distinct $p_\phi$ components of the framework could be adapted to process diverse data types—from images and text to tabular datasets—enabling a more nuanced and powerful approach to integrating heterogeneous data sources. This capability positions the framework as a versatile tool for addressing missing data challenges across various domains and can also help expand it to discrete and multiple outputs. Another valuable area for development is the exploration of methods to capture and leverage dependencies among input features, which could improve the model's predictive performance and provide deeper insights into the underlying data structure. These advancements can enhance the broader appeal of end-to-end approaches like SEMF in the ML community.
+
+\bibliography{bibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{appendix}
+\onecolumn
+
+\section{SEMF algorithm}
+\label{appendix:semf-algo}
+
+\begin{algorithm}[H]
+\caption{SEMF Training: two input sources where \( x_1 \) can be missing}
+\label{algo:semf-train}
+\begin{algorithmic}[1]
+\REQUIRE \( y, x_1, x_2, R \)
+\ENSURE \( \theta, \phi_1, \phi_2, \xi \)
+\STATE Initialize \( \theta, \phi_1, \phi_2, \xi \)
+\STATE Initialize \( D_y, D_{z_1}, D_{z_2}, D_x, D_i \) to \( \emptyset \)
+\STATE Split \( I = \{1, \ldots, N\} \) into \( L \) batches \( \{b_1, \ldots, b_L\} \)
+
+\FOR{\( \ell = 1 \), \ldots, \( L \)}
+    \FORALL{\( i \) in \( b_\ell \)}
+        \IF{\( x_{1,i} \) is absent}
+            \FOR{\( r = 1 \), \ldots, \( R \)}
+                \STATE Simulate \( [j_{i,r}, x_{1,i,r}] \sim p_{\xi}(\cdot | x_{2,i}) \)
+                \STATE Simulate \( z_{1,i,r} \sim p_{\phi_1}(\cdot | x_{1,i,r}) \)
+                \STATE Simulate \( z_{2,i,r} \sim p_{\phi_2}(\cdot | x_{2,i}) \)
+                \STATE Set \( z_{i,r} = [z_{1,i,r}, z_{2,i,r}] \)
+            \ENDFOR
+        \ELSE
+            \FOR{\( r = 1 \), \ldots, \( R \)}
+                \STATE Simulate \( z_{1,i,r} \sim p_{\phi_1}(\cdot | x_{1,i}) \)
+                \STATE Simulate \( z_{2,i,r} \sim p_{\phi_2}(\cdot | x_{2,i}) \)
+                \STATE Set \( z_{i,r} = [z_{1,i,r}, z_{2,i,r}] \)
+            \ENDFOR
+        \ENDIF
+        \FOR{\( r = 1 \), \ldots, \( R \)}
+            \STATE Compute 
+            \[ w_{i,r} = \frac{p_{\theta}(y_i | z_{i,r})}{\sum_{t=1}^R p_{\theta}(y_i | z_{i,t})} \]
+            \STATE Update \( D_y \leftarrow D_y \cup [y_i | z_{i,r} | w_{i,r}] \)
+            \STATE Update \( D_{z_2} \leftarrow D_{z_2} \cup [z_{2,i,r} | x_{2,i} | w_{i,r}] \)
+            \IF{\( x_{1,i} \) is absent}
+                \STATE Update \( D_{z_1} \leftarrow D_{z_1} \cup [z_{1,i,r} | x_{1,i,r} | w_{i,r}] \)
+                \STATE Update \( D_x \leftarrow D_x \cup [j_{i,r} | x_{2,i} | w_{i,r}] \)              
+            \ELSE
+                \STATE Update \( D_{z_1} \leftarrow D_{z_1} \cup [z_{1,i,r} | x_{1,i} | w_{i,r}] \)
+            \ENDIF
+        \ENDFOR
+        \STATE Update \( \theta \leftarrow Q_y(\theta, D_y) \)
+        \STATE Update \( \phi_1 \leftarrow Q_1(\phi_1, D_{z_1}) \)
+        \STATE Update \( \phi_2 \leftarrow Q_2(\phi_2, D_{z_2}) \)
+        \STATE Update \( \xi \leftarrow Q_x(\xi, D_x) \)
+    \ENDFOR
+\ENDFOR
+\STATE Check convergence; Go to step 4 if not
+\end{algorithmic}
+\end{algorithm}
+
+\clearpage
+\begin{algorithm}[H]
+\caption{SEMF Inference}
+\label{algo:semf-infer}
+\begin{algorithmic}[1]
+\REQUIRE $\theta^*, \phi_1^*, \phi_2^*, \xi^*, x_1, x_2, R$
+\ENSURE $z_{i,r}$
+\FOR{$r = 1, \ldots, R$}
+    \IF{$x_{1,i}$ is absent}
+        \STATE Simulate $[j_{i,r}, x_{1,i,r}] \sim p_{\xi^*}(\cdot | x_{2,i})$
+        \STATE Simulate $z_{1,i,r} \sim p_{\phi_1^*}(\cdot | x_{1,i,r})$
+        \STATE Simulate $z_{2,i,r} \sim p_{\phi_2^*}(\cdot | x_{2,i})$
+        \STATE Set $z_{i,r} = [z_{1,i,r}, z_{2,i,r}]$
+    \ELSE
+        \STATE Simulate $z_{1,i,r} \sim p_{\phi_1^*}(\cdot | x_{1,i})$
+        \STATE Simulate $z_{2,i,r} \sim p_{\phi_2^*}(\cdot | x_{2,i})$
+        \STATE Set $z_{i,r} = [z_{1,i,r}, z_{2,i,r}]$
+    \ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+% \onecolumn
+\section{Datasets for tabular benchmark}
+\label{appendix:semf-databench}
+OpenML-CTR23 \cite{fischer2023} datasets are selected in the following manner. The first criterion is to exclude datasets exceeding 30,000 instances or 30 features to maintain computational tractability. Moreover, we exclude the \textit{moneyball} data \cite{kaggle2017moneyball} to control for missing values and any datasets with non-numeric features, such as those with temporal or ordinal data not encoded numerically. We then categorize the datasets based on size: small for those with less than ten features, medium for 10 to 19 features, and large for 20 to 29 features. We apply a similar size classification based on the number of instances, considering datasets with more than 10,000 instances as large. To avoid computational constraints, we exclude datasets that were large in both features and instances, ensuring a varied yet manageable set for our experiments. This leads us to the final list of 11 datasets listed in \autoref{tab:datasets}.
+
+\begin{table*}[htbp]
+\caption{Summary of benchmark tabular datasets retained from \cite{fischer2023}}
+\label{tab:datasets}
+\vskip 0.15in
+\begin{center}
+\begin{sc}
+\begin{small}
+\resizebox{\textwidth}{!}{% Resize table to fit within the text width
+\begin{tabular}{@{} lcccc l @{}}
+\toprule
+Dataset Name      & N Samples & N Features & OpenML Data ID & Y [Min:Max] & Source \\ 
+\midrule
+space\_ga              & 3,107              & 7                   & \href{https://www.openml.org/d/45402}{45402}         & [-3.06:0.1]   &  \cite{kelleypace1997_space_ga} \\ 
+cpu\_activity               & 8,192             & 22                   & \href{https://www.openml.org/d/44978}{44978}         & [0:99]         & \cite{rasmussen1996computer}\\ 
+naval\_propulsion\_plant          & 11,934              & 15                    & \href{https://www.openml.org/d/44969}{44969}         &[0.95:1.0]          & \cite{Coraddu2016} \\ 
+miami\_housing      & 13,932             & 16                   & \href{https://www.openml.org/d/44983}{44983}         & [72,000:2,650,000]         &  \cite{kaggle2022miami} \\ 
+kin8nm                     & 8,192             & 9  & \href{https://www.openml.org/d/44980}{44980}         & [0.04:1.46]         &  \cite{ghahramani1996kin} \\ 
+concrete\_compressive\_strength & 1,030            & 9                   & \href{https://www.openml.org/d/44959}{44959}        & [2.33:82.6]& \cite{yeh1998} \\ 
+cars                    & 804              & 18                   & \href{https://www.openml.org/d/44994}{44994}         & [8,639:70,756]         & \cite{Kuiper2008} \\ 
+energy\_efficiency       & 768              & 9                    & \href{https://www.openml.org/d/44960}{44960}         & [6.01:43.1]         & \cite{Tsanas2012} \\ 
+california\_housing                & 20,640             & 9                   & \href{https://www.openml.org/d/44977}{44977}         & [14,999:500,001] &          \cite{kelleypace1997_california} \\ 
+airfoil\_self\_noise                  & 1,503             & 6                   & \href{https://www.openml.org/d/44957}{44957}         & [103.38:140.98]      &  \cite{brooks1989airfoil} \\ 
+QSAR\_fish\_toxicity                     & 908             & 7                    & \href{https://www.openml.org/d/44970}{44970}         & [0.053:9.612]        & \cite{Cassotti2015} \\ 
+\bottomrule
+\end{tabular}
+}
+\end{small}
+\end{sc}
+\end{center}
+\vskip -0.1in
+\end{table*}
+
+\section{Optimal set of hyper-parameters}
+\label{appendix:optimal-semf}
+
+The hyper-parameter tuning for SEMF is implemented and monitored using Weights \& Biases \cite{wandb}. A random search is done in the hyper-parameter space for a maximum of 500 iterations on all 11 datasets, focusing on tuning the models only on the complete datasets. Key hyper-parameters are varied across a predefined set to balance accuracy and computational efficiency. The following grid is used for hyper-parameter tuning: the number of importance sampling operations $R \in \lbrace 5, 10, 25, 50, 100 \rbrace$ (100 is omitted for MultiMLPS), nodes per latent dimension $m_k \in \lbrace 1, 5, 10, 20, 30 \rbrace$, and standard deviations $\sigma_{m_k} \in \lbrace 0.001, 0.01, 0.1, 1.0 \rbrace$. Early stopping steps (\textsc{patience}) are set to five or ten, and $R_{\text{infer}}$ is explored at [30, 50, 70]. The option to run the models in parallel must be consistently enabled. \autoref{table-combined-hyperparameters} shows the optimal set of hyper-parameters. This table includes common hyper-parameters for complete and 50\% datasets and another part showing $\xi_\mathrm{nodes}$, which is tuned manually and only relevant to the missing data.
+
+\input{assets/tex_tbls/table-combined-hyperparameters}
+
+MultiXGBs and MultiMLPs benefit from early stopping to reduce computation time in complete and incomplete cases. Similarly, the baseline models for these instances use the same hyper-parameters for early stopping. Further, the number of epochs in the case of MultiMLPs is set as 1000, except for \textit{energy\_efficiency} and \textit{QSAR\_fish\_toxicity}, where this is changed to 5000. Any model-specific hyperparameter we did not specify in this paper remains at the implementation's default value (e.g., the number of leaves in XGBoost from \cite{chen2016xgboost}). Along with the supplementary code, we provide three additional CSV files: one for the results and hyperparameters of all 330 runs and the other two for the optimal hyperparameters of SEMF models, both raw (directly from SEMF) and conformalized.
+
+Additional conditions are applied only for experiments with missing data. Datasets \textit{california\_housing}, \textit{cpu\_activity}, \textit{miami\_housing}, and \textit{naval\_propulsion\_plant}—have a \textsc{patience} of five to expedite the training process. Additionally, for \textit{california\_housing} and \textit{cpu\_activity}, the $R_{\text{infer}}$ value is set to 30, while for all the other datasets, it is set to 50. We do this to ensure efficient computation, speed, and memory usage (especially for the GPU).
+
+For training MultiXGBs and MultiETs, the computations are performed in parallel using CPU cores (Intel\textsuperscript{\tiny\textregistered} Core\textsuperscript{\tiny\texttrademark} i9-13900KF). For MultiMLPs, they are done on a GPU (NVIDIA\textsuperscript{\tiny\textregistered} GeForce RTX\textsuperscript{\tiny\texttrademark} 4090). The GPU is also consistently used for the missing data simulator and training $p_\xi$. All the computations are done on a machine with 32 GB of memory. The code provides further details on hardware and reproducibility.
+
+\section{Metrics for prediction intervals}
+\label{appendix:metrics}
+\subsection{Common metrics}
+\label{appendix:common-metrics}
+The most common metrics for evaluating prediction intervals \cite{pearce2018high,zhou2023real} are:
+\begin{itemize}
+    \item Prediction Interval Coverage Probability (PICP): This metric assesses the proportion of times the true value of the target variable falls within the constructed prediction intervals. For a set of test examples ${(x_1, y_1), \ldots, (x_N, y_N)}$, a given level of confidence $\alpha$, and their corresponding prediction intervals ${I_1, \ldots, I_N}$, the PICP is calculated as:
+    \begin{equation}
+    \text{PICP} = \frac{1}{N}\sum_{i=1}^{N}\mathds{1}(y_i \in [L_i, U_i]),
+    \end{equation}
+    where $U_i$ and $L_i$ are the upper and lower bounds of the predicted values for the $i$-th instance. $y_i$ is the actual value of the $i$-th test example, and $\mathds{1}$ is the indicator function, which equals 1 if $y_i$ is in the interval $[L_i,U_i]$ and 0 otherwise. $0 \leq \text{{PICP}} \leq 1$ where PICP closer to 1 and higher than the confidence level $\alpha$ is favored.
+    \item Mean Prediction Interval Width (MPIW): The average width is computed as
+    \begin{equation}
+        \text{MPIW} = \frac{1}{N} \sum_{i=1}^{N} (U_i - L_i),
+    \end{equation}
+    which shows the sharpness or uncertainty, where $0 \leq \text{{MPIW}} < \infty$ and MPIW close to 0 is preferred.
+    
+    \item Normalized Mean Prediction Interval Width (NMPIW): Since MPIW varies by dataset, it can be normalized by the range of the target variable
+    \begin{equation}
+        \text{NMPIW} = \frac{\text{MPIW}}{\max(y) - \min(y)}
+    \end{equation}
+    where $\max(y)$ and $\min(y)$ are the maximum and minimum values of the target variable, respectively. The interpretation remains the same as MPIW.
+\end{itemize}
+
+\newpage
+
+\subsection{Impact of relative metrics for modeling}
+\label{appendix:relative-metrics-impact}
+As our primary focus is on interval prediction, configurations demonstrating the most significant improvements in $\Delta$CWR and $\Delta$PICP are prioritized when selecting the optimal hyper-parameters. Furthermore, both $\Delta$PICP and $\Delta$CWR must be positive, indicating that we must at least have the same reliability of the baseline (PICP) with better or same interval ratios (CWR). In instances where no configuration meets the initial improvement criteria for both metrics, we relax the requirement for positive $\Delta$PICP to accept values greater than -5\% and subsequently -10\%, allowing us to consider configurations where SEMF significantly improves CWR, even if the PICP improvement is less marked but remains within an acceptable range for drawing comparisons.
+
+\newpage
+
+\section{Full conformalized results}
+\label{appendix:full-results}
+
+% Complete data (full)MCAR
+\input{assets/tex_tbls/table-multixgbs-complete.tex}
+\input{assets/tex_tbls/table-multiets-complete.tex}
+\input{assets/tex_tbls/table-multimlps-complete.tex}
+
+% Missing data (full)
+\input{assets/tex_tbls/table-multixgbs-missing.tex}
+\input{assets/tex_tbls/table-multiets-missing.tex}
+\input{assets/tex_tbls/table-multimlps-missing.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+% \newpage
+
+\section{Aggregated results for non-conformalized predictions}
+\label{appendix:non-conformal-aggregated}
+\input{assets/tex_tbls/table-combined-complete-raw-aggregated}
+\input{assets/tex_tbls/table-combined-missing-raw-aggregated}
+\clearpage
+
+\section{Example of learning with non-normality}
+\label{appendix:example-non-normality}
+To illustrate how SEMF adapts to non-normal outcomes, we provide an example from the \textit{naval\_propulsion\_plant dataset} \cite{Coraddu2016}. \autoref{y-distribution} shows the distribution of the ground-truth $y$ variable which in this case is \texttt{gt\_compressor\_decay\_state\_coefficient}. The values are uniformly distributed, and we only standardize the values without changing the shape of the distribution.
+
+\begin{figure}[!h]
+\begin{center}
+\centerline{\includegraphics[width=\columnwidth]{assets/npp_standardized_y_dist.png}}
+\caption{Distribution of the standardized outcome ($y$) variable for the \texttt{naval\_propulsion\_plant} dataset which shows that $y$ is uniformly distributed prior to any training.}
+\label{y-distribution}
+\end{center}
+\end{figure}
+
+After training our SEMF model under the normality assumption with the ideal hyper-parameters (and a seed of 0), sampling from a normal distribution for the $z$ dimension, we infer on some randomly sampled test instances that provide us with the prediction intervals in \autoref{predicted-quantiles}. The `SEMF intervals' can be compared with XGBoost quantile regression, constituting our baseline. This figure shows that SEMF's predicted intervals are better than the baseline. This plot alone does not tell us much about the predicted output distribution. Therefore, we provide \autoref{y-violin}. The last plot shows that for a handful of the instances, the predicted values can take any shape and are not necessarily normal.
+
+\begin{figure}[!h]
+\begin{center}
+\centerline{\includegraphics[width=0.9\columnwidth]{assets/npp_predicted_quantiles.png}}
+\caption{Predicted intervals and true values on 100 randomly selected test samples for SEMF MultiXGBs and XGBoost quantile regression with complete data at 95\% quantiles (according to Eq 13).}
+\label{predicted-quantiles}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\centering
+\centerline{\includegraphics[width=0.85\columnwidth]{assets/npp_violin_plot.png}}
+\caption{Violin plot for the first ten instances of the test set where both the ground truth and 50 values inferred by SEMF (according to Eq 12) are generated for each instance. We have added jitter here, so the points do not perfectly align along the x-axis.}
+\label{y-violin}
+\end{center}
+\end{figure}
+
+\end{appendix}
+\newpage
+\clearpage
+
+% \input{neurips_checklist.tex}
+
+\end{document}
