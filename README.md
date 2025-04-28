@@ -1,9 +1,5 @@
 # SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals
 
-The official implementation of [SEMF: Supervised Expectation-Maximization Framework for Predicting Intervals](https://arxiv.org/abs/2405.18176).
-
-<!-- ![](paper/assets/semf-tikz-plot.png) -->
-
 <p align="center">
   <img src="semf-tikz-plot.png" width="500" />
 </p>
