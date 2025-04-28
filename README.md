@@ -41,7 +41,7 @@ For running the experiments on the real datasets, use `src/experiments/real/run_
 To run experiments and evaluate results on wandb, navigate to `src/experiments/real` and execute the scripts as per your experimental setup and explained in the project structure below. You can re-run the training and the sweeps using wandb:
 
 1. Copy / clone this repo on the different machines / clusters you want to use.
-2. Login to WandB and add your wandb username and project id to `src/experiments/wandb/.env` 
+2. Login to WandB and add your wandb username and project id to `src/experiments/real/.env` 
 3. Move into `src/experiments/real` and run `python run_experiments.py`.
 4. You can run each sweep by running `wandb agent <USERNAME/PROJECTNAME/SWEEPID>. More infos [in the wandb doc](https://docs.wandb.ai/guides/sweeps) . Specify the count as well (in our case, 500).
 

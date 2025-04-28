@@ -1,7 +1,7 @@
 # wandb/
 .vscode/
 tabular_benchmark_src/
-data/tabular_benchmark/
+# data/tabular_benchmark/
 models/
 
 # Ignore plots
@@ -20,8 +20,6 @@ src/experiments/real/wandb
 venv/
 semf_env/
 src/venv/
-src/experiments/local/venv/
-paper/semf-tikz-plot.pdf
 presentation/
 
-src/experiments/real/.env
+# src/experiments/real/.env
