@@ -6,7 +6,7 @@
 
 ## Requirements
 
-1. Ensure Python 3.9.0 is installed on your system.
+1. Ensure Python 3.12.0 is installed on your system.
 
 2. Create and activate a virtual environment using conda:
 
