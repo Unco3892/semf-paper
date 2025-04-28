@@ -1,0 +1,42 @@
+program: run_experiments.py
+method: random
+parameters:
+  model_class:
+    values: ['MultiMLPs']
+  dataset:
+    values:
+      - 'space_ga'
+      - 'cpu_activity'
+      - 'naval_propulsion_plant'
+      - 'miami_housing'
+      - 'kin8nm'
+      - 'concrete_compressive_strength'
+      - 'cars'
+      - 'energy_efficiency'
+      - 'california_housing'
+      - 'airfoil_self_noise'
+      - 'QSAR_fish_toxicity'
+  R:
+    values: [5, 10, 25, 50]
+  nodes_per_feature:
+    values: [1, 5, 10, 20, 30]
+  z_norm_sd:
+    values: [0.001, 0.01, 0.1, 1.0, 'train_residual_models']
+  R_infer:
+    values: [30, 50, 70]
+  seed:
+    values: [1]
+  device:
+    values: ['gpu']
+  n_jobs:
+    values: [1]
+  force_n_jobs:
+    values: [True]  
+  nn_n_epochs:
+    values: [1000, 5000]
+  stopping_metric:
+    values: ['RMSE']
+  max_it:
+    values: [500]
+  stopping_patience:
+    values: [5]

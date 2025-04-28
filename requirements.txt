@@ -1,0 +1,23 @@
+datasets
+joblib
+openml
+matplotlib
+numpy
+pandas
+scikit_learn
+scipy
+seaborn
+wandb
+xgboost
+statsmodels
+## uncomment the line below to install pytroch gpu (otherwise cpu is installed by default)
+--find-links https://download.pytorch.org/whl/torch_stable.html --extra-index-url https://download.pytorch.org/whl/cu126
+torch
+torchvision
+torchaudio
+quantile-forest
+keras
+pytest
+python-dotenv
+mapie
+skorch

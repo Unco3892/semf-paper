@@ -1,0 +1,27 @@
+# wandb/
+.vscode/
+tabular_benchmark_src/
+data/tabular_benchmark/
+models/
+
+# Ignore plots
+src/experiments/plots/
+
+# Ignore wandb runs
+src/experiments/real/plots/
+src/experiments/real/wandb
+
+# Ignore pycache
+**/__pycache__/
+# src/experiments/predicted_quantiles.png
+# src/experiments/violin_plot.png
+
+# Ignore venv
+venv/
+semf_env/
+src/venv/
+src/experiments/local/venv/
+paper/semf-tikz-plot.pdf
+presentation/
+
+src/experiments/real/.env
